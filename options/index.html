@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShieldBlock Pro — Settings</title>
+  <meta name="description" content="Configure ShieldBlock Pro ad blocker settings, whitelist, custom rules, and appearance.">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" role="navigation" aria-label="Settings sections">
+      <div class="sidebar-brand">
+        <div class="sidebar-shield">
+          <svg viewBox="0 0 40 48" fill="none" width="22" height="26">
+            <path d="M20 2L4 9.2V22C4 32.2 11.2 41.8 20 44C28.8 41.8 36 32.2 36 22V9.2L20 2Z" fill="url(#sg2)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <path d="M14 23l4 4 8-8" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="sg2" x1="20" y1="2" x2="20" y2="44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#818cf8"/><stop offset="100%" stop-color="#6366f1"/></linearGradient></defs>
+          </svg>
+        </div>
+        <div>
+          <div class="sidebar-name">ShieldBlock Pro</div>
+          <div class="sidebar-ver" id="extVersion">v1.0.0</div>
+        </div>
+      </div>
+      <ul class="nav-list" role="list">
+        <li><button class="nav-item active" data-section="appearance" id="nav-appearance">
+          <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M8 2v1M8 13v1M2 8h1M13 8h1M3.8 3.8l.7.7M11.5 11.5l.7.7M3.8 12.2l.7-.7M11.5 4.5l.7-.7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          Appearance
+        </button></li>
+        <li><button class="nav-item" data-section="filters" id="nav-filters">
+          <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M2 4h12M4 8h8M6 12h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          Filter Lists
+        </button></li>
+        <li><button class="nav-item" data-section="whitelist" id="nav-whitelist">
+          <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M8 2L3 4.5V9c0 3.3 2.3 6.4 5 7 2.7-.6 5-3.7 5-7V4.5L8 2z" stroke="currentColor" stroke-width="1.3"/><path d="M5.5 8l2 2 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Whitelist
+        </button></li>
+        <li><button class="nav-item" data-section="rules" id="nav-rules">
+          <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M3 4h10M3 8h7M3 12h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="13" cy="12" r="2" stroke="currentColor" stroke-width="1.3"/></svg>
+          Custom Rules
+        </button></li>
+        <li><button class="nav-item" data-section="importexport" id="nav-importexport">
+          <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><path d="M8 2v8M5 7l3 3 3-3M3 12h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Import / Export
+        </button></li>
+        <li><button class="nav-item" data-section="about" id="nav-about">
+          <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v5M8 5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          About
+        </button></li>
+      </ul>
+      <div class="sidebar-footer">
+        <div class="global-toggle-row">
+          <span>ShieldBlock Pro</span>
+          <label class="toggle-mini">
+            <input type="checkbox" id="globalEnabled" checked>
+            <span class="toggle-mini-track"><span class="toggle-mini-thumb"></span></span>
+          </label>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main" role="main">
+
+      <div class="save-bar" id="saveBar">
+        <span>Unsaved changes</span>
+        <button class="btn-primary" id="saveBtn">Save Changes</button>
+      </div>
+
+      <!-- ── Appearance Section ──────────────────────────────────────────── -->
+      <section class="section active" id="section-appearance">
+        <div class="section-header">
+          <h1 class="section-title">Appearance</h1>
+          <p class="section-desc">Customize how ShieldBlock Pro looks.</p>
+        </div>
+
+        <div class="card">
+          <div class="setting-row">
+            <div class="setting-info">
+              <label class="setting-label" for="themeSelect">Theme</label>
+              <span class="setting-desc">Choose your preferred color theme</span>
+            </div>
+            <div class="theme-picker">
+              <button class="theme-btn active" data-theme="dark" id="themeBtn-dark">
+                <span class="theme-preview dark-preview"></span>
+                Dark
+              </button>
+              <button class="theme-btn" data-theme="light" id="themeBtn-light">
+                <span class="theme-preview light-preview"></span>
+                Light
+              </button>
+              <button class="theme-btn" data-theme="auto" id="themeBtn-auto">
+                <span class="theme-preview auto-preview"></span>
+                Auto
+              </button>
+            </div>
+          </div>
+
+          <div class="setting-divider"></div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <label class="setting-label" for="accentColor">Accent Color</label>
+              <span class="setting-desc">Customize the highlight color</span>
+            </div>
+            <div class="color-picker-row">
+              <input type="color" id="accentColor" value="#818cf8" class="color-input">
+              <div class="color-presets">
+                <button class="color-preset active" data-color="#818cf8" style="background:#818cf8" title="Indigo"></button>
+                <button class="color-preset" data-color="#34d399" style="background:#34d399" title="Emerald"></button>
+                <button class="color-preset" data-color="#f472b6" style="background:#f472b6" title="Pink"></button>
+                <button class="color-preset" data-color="#fb923c" style="background:#fb923c" title="Orange"></button>
+                <button class="color-preset" data-color="#60a5fa" style="background:#60a5fa" title="Blue"></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="setting-divider"></div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <label class="setting-label" for="animationsToggle">Animations</label>
+              <span class="setting-desc">Smooth transitions and micro-animations</span>
+            </div>
+            <label class="toggle-mini">
+              <input type="checkbox" id="animationsToggle" checked>
+              <span class="toggle-mini-track"><span class="toggle-mini-thumb"></span></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Filter Lists Section ────────────────────────────────────────── -->
+      <section class="section" id="section-filters">
+        <div class="section-header">
+          <h1 class="section-title">Filter Lists</h1>
+          <p class="section-desc">Enable or disable built-in filter categories.</p>
+        </div>
+        <div class="card">
+          <div class="setting-row">
+            <div class="setting-info">
+              <label class="setting-label">Ad Blocking</label>
+              <span class="setting-desc">Block ads from major ad networks (~2,000 rules)</span>
+            </div>
+            <label class="toggle-mini">
+              <input type="checkbox" id="filterAds" checked>
+              <span class="toggle-mini-track"><span class="toggle-mini-thumb"></span></span>
+            </label>
+          </div>
+          <div class="setting-divider"></div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <label class="setting-label">Privacy & Trackers</label>
+              <span class="setting-desc">Block tracking pixels and analytics (~500 rules)</span>
+            </div>
+            <label class="toggle-mini">
+              <input type="checkbox" id="filterPrivacy" checked>
+              <span class="toggle-mini-track"><span class="toggle-mini-thumb"></span></span>
+            </label>
+          </div>
+          <div class="setting-divider"></div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <label class="setting-label">Cosmetic Filtering</label>
+              <span class="setting-desc">Hide ad elements using CSS injection</span>
+            </div>
+            <label class="toggle-mini">
+              <input type="checkbox" id="cosmeticEnabled" checked>
+              <span class="toggle-mini-track"><span class="toggle-mini-thumb"></span></span>
+            </label>
+          </div>
+          <div class="setting-divider"></div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <label class="setting-label">Popup Blocker</label>
+              <span class="setting-desc">Block unwanted popup windows and new tabs</span>
+            </div>
+            <label class="toggle-mini">
+              <input type="checkbox" id="popupBlockerEnabled" checked>
+              <span class="toggle-mini-track"><span class="toggle-mini-thumb"></span></span>
+            </label>
+          </div>
+          <div class="setting-divider"></div>
+          <div class="setting-row">
+            <div class="setting-info">
+              <label class="setting-label">URL Cleaner</label>
+              <span class="setting-desc">Strip tracking parameters (utm_*, fbclid, etc.)</span>
+            </div>
+            <label class="toggle-mini">
+              <input type="checkbox" id="antiRedirectEnabled" checked>
+              <span class="toggle-mini-track"><span class="toggle-mini-thumb"></span></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Whitelist Section ───────────────────────────────────────────── -->
+      <section class="section" id="section-whitelist">
+        <div class="section-header">
+          <h1 class="section-title">Whitelist</h1>
+          <p class="section-desc">Sites where ShieldBlock Pro is disabled.</p>
+        </div>
+        <div class="card">
+          <div class="whitelist-add-row">
+            <input type="text" id="whitelistInput" class="text-input" placeholder="example.com" autocomplete="off" spellcheck="false">
+            <button class="btn-primary" id="whitelistAddBtn">Add Site</button>
+          </div>
+          <div id="whitelistError" class="error-msg" hidden></div>
+          <div class="whitelist-list" id="whitelistList">
+            <div class="empty-state">No whitelisted sites yet.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Custom Rules Section ────────────────────────────────────────── -->
+      <section class="section" id="section-rules">
+        <div class="section-header">
+          <h1 class="section-title">Custom Rules</h1>
+          <p class="section-desc">Add your own network and cosmetic blocking rules.</p>
+        </div>
+        <div class="card">
+          <div class="rule-add-area">
+            <textarea id="ruleInput" class="rule-textarea" placeholder="||example.com^&#10;##.ad-banner&#10;@@||trusted-site.com^" rows="4" spellcheck="false"></textarea>
+            <div class="rule-add-actions">
+              <span class="rule-hint">Supports EasyList syntax: <code>||domain^</code> <code>##.selector</code> <code>@@allowlist</code></span>
+              <button class="btn-primary" id="addRulesBtn">Add Rules</button>
+            </div>
+            <div id="ruleError" class="error-msg" hidden></div>
+          </div>
+          <div class="rules-list-header">
+            <span class="rules-count" id="rulesCount">0 rules</span>
+            <button class="btn-ghost" id="clearAllRulesBtn">Clear All</button>
+          </div>
+          <div class="rules-list" id="rulesList">
+            <div class="empty-state">No custom rules yet.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Import/Export Section ───────────────────────────────────────── -->
+      <section class="section" id="section-importexport">
+        <div class="section-header">
+          <h1 class="section-title">Import / Export</h1>
+          <p class="section-desc">Backup your settings or import a filter list.</p>
+        </div>
+        <div class="card-grid">
+          <div class="card">
+            <h2 class="card-title">Import Filter List</h2>
+            <p class="card-desc">Import an EasyList-compatible .txt filter file.</p>
+            <div class="upload-zone" id="uploadZone">
+              <svg viewBox="0 0 24 24" fill="none" width="32" height="32"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M8 12l4-4 4 4M12 8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <p>Drag & drop a .txt file or <label class="upload-link" for="filterFileInput">browse</label></p>
+              <input type="file" id="filterFileInput" accept=".txt" hidden>
+            </div>
+            <div id="importStatus" class="import-status" hidden></div>
+          </div>
+          <div class="card">
+            <h2 class="card-title">Export Settings</h2>
+            <p class="card-desc">Download all settings, whitelist, and custom rules as JSON.</p>
+            <button class="btn-primary btn-full" id="exportBtn">
+              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M8 2v8M5 7l3 3 3-3M3 12h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Export settings.json
+            </button>
+          </div>
+          <div class="card danger-card">
+            <h2 class="card-title danger">Reset All Settings</h2>
+            <p class="card-desc">Restore ShieldBlock Pro to factory defaults. This cannot be undone.</p>
+            <button class="btn-danger btn-full" id="resetBtn">Reset to Defaults</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── About Section ──────────────────────────────────────────────── -->
+      <section class="section" id="section-about">
+        <div class="section-header">
+          <h1 class="section-title">About</h1>
+        </div>
+        <div class="card about-card">
+          <div class="about-logo">
+            <svg viewBox="0 0 40 48" fill="none" width="48" height="56">
+              <path d="M20 2L4 9.2V22C4 32.2 11.2 41.8 20 44C28.8 41.8 36 32.2 36 22V9.2L20 2Z" fill="url(#sg3)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+              <path d="M14 23l4 4 8-8" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs><linearGradient id="sg3" x1="20" y1="2" x2="20" y2="44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#818cf8"/><stop offset="100%" stop-color="#6366f1"/></linearGradient></defs>
+            </svg>
+          </div>
+          <h2 class="about-name">ShieldBlock Pro</h2>
+          <p class="about-version" id="aboutVersion">Version 1.0.0</p>
+          <p class="about-desc">A professional-grade ad and tracker blocker for Chrome, Brave, and Edge. Built with Manifest V3 for maximum performance and privacy.</p>
+          <div class="about-stats" id="aboutStats">
+            <div class="about-stat"><span class="about-stat-value" id="statRules">–</span><span class="about-stat-label">Active Rules</span></div>
+            <div class="about-stat"><span class="about-stat-value" id="statTotal">–</span><span class="about-stat-label">Total Blocked</span></div>
+            <div class="about-stat"><span class="about-stat-value" id="statCustom">–</span><span class="about-stat-label">Custom Rules</span></div>
+          </div>
+          <div class="about-links">
+            <span class="about-license">MIT License</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script type="module" src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShieldBlock Pro — Dashboard</title>
+  <meta name="description" content="ShieldBlock Pro statistics dashboard showing blocked requests, top domains, and activity history.">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="dashboard">
+
+    <!-- Header -->
+    <header class="dash-header">
+      <div class="dash-brand">
+        <div class="dash-shield">
+          <svg viewBox="0 0 40 48" fill="none" width="22" height="26">
+            <path d="M20 2L4 9.2V22C4 32.2 11.2 41.8 20 44C28.8 41.8 36 32.2 36 22V9.2L20 2Z" fill="url(#dsg)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <path d="M14 23l4 4 8-8" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="dsg" x1="20" y1="2" x2="20" y2="44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#818cf8"/><stop offset="100%" stop-color="#6366f1"/></linearGradient></defs>
+          </svg>
+        </div>
+        <div>
+          <h1 class="dash-title">ShieldBlock Pro</h1>
+          <p class="dash-sub">Statistics Dashboard</p>
+        </div>
+      </div>
+      <div class="dash-header-actions">
+        <button class="dash-btn-ghost" id="openSettings">Settings</button>
+        <button class="dash-btn-danger" id="clearStatsBtn">Clear Stats</button>
+      </div>
+    </header>
+
+    <!-- Hero Total Counter -->
+    <div class="hero-section">
+      <div class="hero-glow"></div>
+      <div class="hero-content">
+        <div class="hero-counter" id="heroCounter">0</div>
+        <div class="hero-label">Total Requests Blocked</div>
+        <div class="hero-sub" id="heroSince">Since installation</div>
+      </div>
+    </div>
+
+    <!-- Stat Cards Row -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon" style="--icon-color:#818cf8;">
+          <svg viewBox="0 0 20 20" fill="none" width="18" height="18"><path d="M10 2L3 5.5V11C3 15.1 6.2 18.9 10 20C13.8 18.9 17 15.1 17 11V5.5L10 2Z" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="statToday">0</div>
+          <div class="stat-label">Blocked Today</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="--icon-color:#f87171;">
+          <svg viewBox="0 0 20 20" fill="none" width="18" height="18"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M10 6v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="statAds">0</div>
+          <div class="stat-label">Ads Blocked</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="--icon-color:#fbbf24;">
+          <svg viewBox="0 0 20 20" fill="none" width="18" height="18"><path d="M2 5h16M5 5V3h10v2M7 10h6M8 14h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="statTrackers">0</div>
+          <div class="stat-label">Trackers Stopped</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="--icon-color:#34d399;">
+          <svg viewBox="0 0 20 20" fill="none" width="18" height="18"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zM10 6v4M10 12v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="statDomains">0</div>
+          <div class="stat-label">Domains Blocked</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="charts-row">
+
+      <!-- Weekly Bar Chart -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <h2 class="chart-title">7-Day History</h2>
+          <span class="chart-badge" id="weeklyTotal">–</span>
+        </div>
+        <div class="chart-area" id="barChartArea">
+          <canvas id="barChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Type Donut Chart -->
+      <div class="chart-card chart-card-sm">
+        <div class="chart-header">
+          <h2 class="chart-title">By Type</h2>
+        </div>
+        <div class="donut-container">
+          <canvas id="donutChart"></canvas>
+          <div class="donut-center">
+            <div class="donut-total" id="donutTotal">0</div>
+            <div class="donut-label">blocked</div>
+          </div>
+        </div>
+        <div class="donut-legend" id="donutLegend"></div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Row: Top Domains + Live Feed -->
+    <div class="bottom-row">
+
+      <!-- Top Blocked Domains -->
+      <div class="domains-card">
+        <div class="card-header">
+          <h2 class="chart-title">Top Blocked Domains</h2>
+        </div>
+        <div class="domains-list" id="domainsList">
+          <div class="empty-state">Loading…</div>
+        </div>
+      </div>
+
+      <!-- Live Activity Feed -->
+      <div class="feed-card">
+        <div class="card-header">
+          <h2 class="chart-title">Live Activity</h2>
+          <span class="live-dot"></span>
+        </div>
+        <div class="feed-list" id="feedList">
+          <div class="empty-state">Waiting for activity…</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script type="module" src="index.js"></script>
+</body>
+</html>

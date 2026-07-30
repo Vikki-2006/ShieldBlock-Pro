@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShieldBlock Pro</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-wrap">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-brand">
+        <div class="shield-icon" id="shieldIcon">
+          <svg viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 2L4 9.2V22C4 32.2 11.2 41.8 20 44C28.8 41.8 36 32.2 36 22V9.2L20 2Z" fill="url(#shieldGrad)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <path d="M14 23l4 4 8-8" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="shieldGrad" x1="20" y1="2" x2="20" y2="44" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#818cf8"/>
+                <stop offset="100%" stop-color="#6366f1"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="header-text">
+          <span class="brand-name">ShieldBlock Pro</span>
+          <span class="brand-status" id="statusLabel">Active</span>
+        </div>
+      </div>
+      <div class="toggle-wrap">
+        <label class="toggle" id="mainToggle" title="Toggle ShieldBlock Pro">
+          <input type="checkbox" id="enabledToggle" checked>
+          <span class="toggle-track">
+            <span class="toggle-thumb"></span>
+          </span>
+        </label>
+      </div>
+    </header>
+
+    <!-- Site Card -->
+    <div class="site-card" id="siteCard">
+      <div class="site-info">
+        <div class="site-favicon" id="siteFavicon">
+          <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="site-details">
+          <span class="site-domain" id="siteDomain">Loading…</span>
+          <span class="site-sub" id="siteStatusText">Scanning…</span>
+        </div>
+      </div>
+      <button class="pause-btn" id="pauseBtn" title="Pause blocking on this site">
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14">
+          <rect x="3" y="2" width="4" height="12" rx="1.5" fill="currentColor"/>
+          <rect x="9" y="2" width="4" height="12" rx="1.5" fill="currentColor"/>
+        </svg>
+        <span id="pauseBtnLabel">Pause</span>
+      </button>
+    </div>
+
+    <!-- Counter Section -->
+    <div class="counter-section">
+      <div class="counter-card">
+        <div class="counter-value" id="tabCount">0</div>
+        <div class="counter-label">Blocked this page</div>
+      </div>
+      <div class="counter-divider"></div>
+      <div class="counter-card">
+        <div class="counter-value" id="totalCount">0</div>
+        <div class="counter-label">Blocked total</div>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="activity-section">
+      <div class="section-header">
+        <span class="section-title">Recent Blocked</span>
+        <span class="section-badge" id="activityBadge">0</span>
+      </div>
+      <div class="activity-list" id="activityList">
+        <div class="activity-empty">
+          <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+            <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Nothing blocked yet</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Actions -->
+    <footer class="footer">
+      <button class="footer-btn" id="openDashboard" title="Open Dashboard">
+        <svg viewBox="0 0 16 16" fill="none" width="15" height="15">
+          <rect x="1" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/>
+          <rect x="9" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/>
+          <rect x="1" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/>
+          <rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/>
+        </svg>
+        Dashboard
+      </button>
+      <button class="footer-btn" id="openOptions" title="Open Settings">
+        <svg viewBox="0 0 16 16" fill="none" width="15" height="15">
+          <path d="M8 10a2 2 0 100-4 2 2 0 000 4z" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M13.3 7H14a1 1 0 000-2h-.7a5.5 5.5 0 00-.4-1l.5-.5a1 1 0 00-1.4-1.4l-.5.5a5.5 5.5 0 00-1-.4V2a1 1 0 00-2 0v.7a5.5 5.5 0 00-1 .4l-.5-.5A1 1 0 005.6 4l.5.5a5.5 5.5 0 00-.4 1H5a1 1 0 000 2h.7a5.5 5.5 0 00.4 1l-.5.5a1 1 0 001.4 1.4l.5-.5a5.5 5.5 0 001 .4V14a1 1 0 002 0v-.7a5.5 5.5 0 001-.4l.5.5a1 1 0 001.4-1.4l-.5-.5a5.5 5.5 0 00.4-1z" stroke="currentColor" stroke-width="1.3"/>
+        </svg>
+        Settings
+      </button>
+    </footer>
+
+  </div>
+  <script type="module" src="index.js"></script>
+</body>
+</html>

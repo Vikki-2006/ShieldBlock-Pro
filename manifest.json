@@ -1,0 +1,118 @@
+{
+  "manifest_version": 3,
+  "name": "ShieldBlock Pro",
+  "version": "1.0.0",
+  "description": "Professional ad & tracker blocker with real-time statistics and a beautiful dashboard.",
+  "author": "ShieldBlock Pro",
+
+  "icons": {
+    "16":  "assets/icons/icon16.png",
+    "32":  "assets/icons/icon32.png",
+    "48":  "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+
+  "action": {
+    "default_popup": "popup/index.html",
+    "default_icon": {
+      "16":  "assets/icons/icon16.png",
+      "32":  "assets/icons/icon32.png",
+      "48":  "assets/icons/icon48.png",
+      "128": "assets/icons/icon128.png"
+    },
+    "default_title": "ShieldBlock Pro"
+  },
+
+  "background": {
+    "service_worker": "background/index.js",
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": [
+        "content/index.js",
+        "content/CosmeticEngine.js",
+        "content/AntiRedirect.js",
+        "content/ResourceObserver.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content/PopupBlocker.js"],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": false
+    }
+  ],
+
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ads",
+        "enabled": true,
+        "path": "rules/static_rules.json"
+      },
+      {
+        "id": "privacy",
+        "enabled": true,
+        "path": "rules/privacy_rules.json"
+      }
+    ]
+  },
+
+  "permissions": [
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback",
+    "storage",
+    "tabs",
+    "activeTab",
+    "webNavigation",
+    "scripting",
+    "alarms",
+    "contextMenus"
+  ],
+
+  "optional_permissions": [
+    "notifications"
+  ],
+
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": true
+  },
+
+  "commands": {
+    "toggle-extension": {
+      "suggested_key": { "default": "Alt+Shift+B" },
+      "description": "Toggle ShieldBlock Pro on/off"
+    },
+    "pause-site": {
+      "suggested_key": { "default": "Alt+Shift+P" },
+      "description": "Pause blocking on current site"
+    },
+    "open-dashboard": {
+      "suggested_key": { "default": "Alt+Shift+D" },
+      "description": "Open the ShieldBlock Pro dashboard"
+    }
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/fonts/*", "assets/icons/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+
+  "content_security_policy": {
+    "extension_pages": "default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; script-src 'self'"
+  }
+}
