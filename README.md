@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/logo.png" width="140">
+<img src="assets/logo.png" width="140" alt="ShieldBlock Pro">
 
 # 🛡️ ShieldBlock Pro
 
@@ -14,105 +14,131 @@ Fast • Lightweight • Privacy Focused • Open Source
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
 
-A modern privacy-first browser extension that blocks ads, trackers, popups, cookie banners and cleans tracking URLs while providing real-time statistics.
+A modern privacy-first browser extension built with Manifest V3 that blocks advertisements, trackers, popup windows, cookie banners, and tracking URLs while providing a beautiful real-time statistics dashboard.
 
 </div>
 
 ---
 
-## ✨ Features
+# ✨ Features
 
-| | |
-|---|---|
-| 🚫 Network Ad Blocking | Manifest V3 DeclarativeNetRequest |
-| 🎨 Cosmetic Filtering | Hide banners, popups & floating ads |
-| 🪟 Popup Blocker | Blocks popup windows |
-| 🔗 URL Cleaner | Removes tracking parameters |
-| 📊 Live Statistics | Per-page & total statistics |
-| 🔔 Badge Counter | Real-time blocked request count |
-| ✅ Whitelist | Permanent & temporary site exceptions |
-| ⚙️ Dashboard | Modern analytics dashboard |
-| 🌙 Dark UI | Professional glassmorphism interface |
+| Feature | Description |
+|----------|-------------|
+| 🚫 Network Ad Blocking | Blocks advertising requests using Manifest V3 DeclarativeNetRequest |
+| 🎨 Cosmetic Filtering | Hides banners, floating ads, cookie notices and sponsored content |
+| 🪟 Popup Blocker | Prevents unwanted popup windows and redirects |
+| 🔗 URL Cleaner | Removes tracking parameters like UTM, fbclid and more |
+| 📊 Live Statistics | Real-time blocked request statistics |
+| 🔔 Badge Counter | Live badge showing blocked requests |
+| ✅ Whitelist | Permanent and temporary website exceptions |
+| ⚙️ Dashboard | Beautiful analytics dashboard |
+| 🌙 Modern UI | Glassmorphism-inspired dark interface |
+| ⚡ Lightweight | Optimized for performance and low memory usage |
 
 ---
 
 # 📸 Screenshots
 
-## Popup
+## 🛡️ Popup
 
 <p align="center">
-<img src="assets/screenshots/popup.png" width="340">
+<img src="assets/screenshots/popup.png" width="320" alt="Popup">
+</p>
+
+<p align="center">
+Quick protection controls, live statistics, recent blocked requests and one-click access to Dashboard & Settings.
 </p>
 
 ---
 
-## Dashboard
+## 📊 Dashboard
 
 <p align="center">
-<img src="assets/screenshots/dashboard.png">
+<img src="assets/screenshots/dashboard.png" alt="Dashboard">
+</p>
+
+<p align="center">
+Comprehensive analytics showing blocked requests, activity history, domains, trackers and usage statistics.
 </p>
 
 ---
 
-## Settings
+## 🎨 Appearance Settings
 
 <p align="center">
-<img src="assets/screenshots/settings.png">
+<img src="assets/screenshots/settings-appearance.png" alt="Appearance Settings">
+</p>
+
+<p align="center">
+Customize themes, accent colors and animations to personalize ShieldBlock Pro.
+</p>
+
+---
+
+## 🛡️ Filter Lists
+
+<p align="center">
+<img src="assets/screenshots/settings-filterlists.png" alt="Filter Lists">
+</p>
+
+<p align="center">
+Enable or disable built-in protection modules including Ad Blocking, Privacy Protection, Cosmetic Filtering, Popup Blocking and URL Cleaner.
+</p>
+
+---
+
+## ℹ️ About
+
+<p align="center">
+<img src="assets/screenshots/about.png" alt="About">
+</p>
+
+<p align="center">
+Extension information, version details and protection statistics.
 </p>
 
 ---
 
 # ⚡ Performance
 
-✔ Lightweight Manifest V3 architecture
+ShieldBlock Pro is designed for speed and efficiency.
 
-✔ Background Service Worker
-
-✔ Optimized rule engine
-
-✔ Low memory usage
-
-✔ Fast startup
-
-✔ Efficient storage
-
-✔ Modular architecture
-
----
-
-# 🔒 Privacy
-
-ShieldBlock Pro respects your privacy.
-
-- No telemetry
-- No analytics
-- No data collection
-- No cloud sync
-- No tracking
-- Everything runs locally
+- ✅ Manifest V3 architecture
+- ✅ Background Service Worker
+- ✅ Optimized rule engine
+- ✅ Lightweight memory usage
+- ✅ Fast startup
+- ✅ Modular architecture
+- ✅ Efficient storage management
+- ✅ Real-time statistics engine
 
 ---
 
 # 🏗 Architecture
 
-```
+```text
 Browser
-      │
-      ▼
+     │
+     ▼
 Manifest V3
-      │
-      ▼
+     │
+     ▼
 Background Service Worker
-      │
-      ├── Rule Engine
-      ├── Stats Engine
-      ├── Badge Manager
-      ├── Message Router
-      └── Storage
+     │
+     ├── Rule Engine
+     ├── Stats Engine
+     ├── Badge Manager
+     ├── Message Router
+     ├── Whitelist Manager
+     └── Storage
               │
       ┌───────┴────────┐
       ▼                ▼
  Popup UI        Dashboard UI
+      │                │
+      └────────┬───────┘
+               ▼
+        Chrome Storage API
 ```
 
 ---
@@ -124,43 +150,58 @@ shieldblock-pro/
 │
 ├── manifest.json
 │
+├── assets/
+│   ├── logo.png
+│   ├── icons/
+│   └── screenshots/
+│       ├── popup.png
+│       ├── dashboard.png
+│       ├── settings-appearance.png
+│       ├── settings-filterlists.png
+│       └── about.png
+│
 ├── background/
 │   ├── index.js
 │   ├── RuleEngine.js
 │   ├── StatsEngine.js
 │   ├── BadgeManager.js
 │   ├── MessageRouter.js
+│   ├── WhitelistManager.js
 │   └── ...
 │
 ├── content/
 │   ├── CosmeticEngine.js
 │   ├── PopupBlocker.js
 │   ├── AntiRedirect.js
+│   ├── ResourceObserver.js
 │   └── ...
 │
 ├── popup/
 ├── dashboard/
 ├── options/
 ├── rules/
-├── assets/
-└── shared/
+├── shared/
+└── scripts/
 ```
 
 ---
 
-# 🛠 Tech Stack
+# 🛠 Technology Stack
 
 - JavaScript (ES6)
 - Manifest V3
 - Chrome Extensions API
-- DeclarativeNetRequest
+- DeclarativeNetRequest API
 - Chrome Storage API
 - MutationObserver
-- CSS Selectors
+- CSS3
+- HTML5
 
 ---
 
 # 🚀 Installation
+
+Clone the repository
 
 ```bash
 git clone https://github.com/Vikki-2006/ShieldBlock-Pro.git
@@ -172,50 +213,74 @@ Open Chrome
 chrome://extensions
 ```
 
-Enable **Developer Mode**
+Enable
 
-Click **Load unpacked**
+```
+Developer Mode
+```
 
-Select the project folder.
+Click
 
-Done ✅
+```
+Load unpacked
+```
+
+Select the cloned project folder.
+
+Done! 🎉
 
 ---
 
 # 📋 Roadmap
 
-- [ ] More filter lists
-- [ ] Custom filters
+- [ ] EasyList integration
+- [ ] Custom filter subscriptions
 - [ ] Sync settings
 - [ ] Backup & Restore
-- [ ] Advanced tracker protection
-- [ ] Performance improvements
-- [ ] AI-assisted rule suggestions
+- [ ] Website-specific rules
+- [ ] Enhanced tracker protection
+- [ ] Performance optimizations
+- [ ] AI-assisted filter suggestions
 
 ---
 
 # 🤝 Contributing
 
-Contributions are welcome.
+Contributions are welcome!
 
-1. Fork
-2. Create feature branch
-3. Commit
-4. Push
-5. Open Pull Request
+1. Fork the repository
+2. Create a new feature branch
+
+```bash
+git checkout -b feature/my-feature
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Add awesome feature"
+```
+
+4. Push to GitHub
+
+```bash
+git push origin feature/my-feature
+```
+
+5. Open a Pull Request
 
 ---
 
 # 📜 License
 
-Licensed under the MIT License.
+This project is licensed under the **MIT License**.
+
+See the LICENSE file for more information.
 
 ---
 
 <div align="center">
 
-Made with ❤️ by **Vigneshwaran**
-
-⭐ Star this repository if you found it useful.
+If you found this project useful, consider giving it a ⭐ on GitHub!
 
 </div>
