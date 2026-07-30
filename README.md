@@ -1,132 +1,221 @@
-# ShieldBlock Pro
+<div align="center">
 
-> **A professional, Manifest V3 ad blocker for Chrome, Brave, and Edge.**
+<img src="assets/logo.png" width="140">
 
-![ShieldBlock Pro](assets/icons/icon128.png)
+# 🛡️ ShieldBlock Pro
+
+### Professional Manifest V3 Ad Blocker for Chromium Browsers
+
+Fast • Lightweight • Privacy Focused • Open Source
+
+![Chrome](https://img.shields.io/badge/Chrome-Compatible-blue?style=for-the-badge&logo=googlechrome)
+![Manifest](https://img.shields.io/badge/Manifest-V3-success?style=for-the-badge)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow?style=for-the-badge&logo=javascript)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
+
+A modern privacy-first browser extension that blocks ads, trackers, popups, cookie banners and cleans tracking URLs while providing real-time statistics.
+
+</div>
 
 ---
 
-## Features
+## ✨ Features
 
-- **Network-level blocking** via `declarativeNetRequest` — 80 bundled rules targeting major ad networks and trackers
-- **Cosmetic filtering** — 50+ CSS selectors to hide cookie banners, ad slots, newsletter popups, and floating ads
-- **URL cleaner** — strips 30+ tracking parameters (UTM, fbclid, gclid, etc.) without page reload
-- **Popup blocker** — overrides `window.open` in the MAIN world to block ad popups
-- **Live statistics** — per-tab badge counter, persistent aggregate totals, 30-day history
-- **Custom rules** — EasyList-compatible rule import and manual entry
-- **Whitelist** — permanent and temporary (per-session) site exceptions
-- **Beautiful UI** — dark glassmorphism popup, full settings page, statistics dashboard
+| | |
+|---|---|
+| 🚫 Network Ad Blocking | Manifest V3 DeclarativeNetRequest |
+| 🎨 Cosmetic Filtering | Hide banners, popups & floating ads |
+| 🪟 Popup Blocker | Blocks popup windows |
+| 🔗 URL Cleaner | Removes tracking parameters |
+| 📊 Live Statistics | Per-page & total statistics |
+| 🔔 Badge Counter | Real-time blocked request count |
+| ✅ Whitelist | Permanent & temporary site exceptions |
+| ⚙️ Dashboard | Modern analytics dashboard |
+| 🌙 Dark UI | Professional glassmorphism interface |
 
 ---
 
-## Project Structure
+# 📸 Screenshots
+
+## Popup
+
+<p align="center">
+<img src="assets/screenshots/popup.png" width="340">
+</p>
+
+---
+
+## Dashboard
+
+<p align="center">
+<img src="assets/screenshots/dashboard.png">
+</p>
+
+---
+
+## Settings
+
+<p align="center">
+<img src="assets/screenshots/settings.png">
+</p>
+
+---
+
+# ⚡ Performance
+
+✔ Lightweight Manifest V3 architecture
+
+✔ Background Service Worker
+
+✔ Optimized rule engine
+
+✔ Low memory usage
+
+✔ Fast startup
+
+✔ Efficient storage
+
+✔ Modular architecture
+
+---
+
+# 🔒 Privacy
+
+ShieldBlock Pro respects your privacy.
+
+- No telemetry
+- No analytics
+- No data collection
+- No cloud sync
+- No tracking
+- Everything runs locally
+
+---
+
+# 🏗 Architecture
 
 ```
+Browser
+      │
+      ▼
+Manifest V3
+      │
+      ▼
+Background Service Worker
+      │
+      ├── Rule Engine
+      ├── Stats Engine
+      ├── Badge Manager
+      ├── Message Router
+      └── Storage
+              │
+      ┌───────┴────────┐
+      ▼                ▼
+ Popup UI        Dashboard UI
+```
+
+---
+
+# 📂 Project Structure
+
+```text
 shieldblock-pro/
-├── manifest.json              ← MV3 manifest
+│
+├── manifest.json
+│
 ├── background/
-│   ├── index.js               ← Service worker entry (all listeners registered top-level)
-│   ├── MessageRouter.js       ← Typed message bus handler
-│   ├── RuleEngine.js          ← DNR rule management (static + dynamic + session)
-│   ├── RuleIDRegistry.js      ← Persistent rule ID allocator (prevents collisions)
-│   ├── FilterParser.js        ← EasyList-compatible rule parser
-│   ├── WhitelistManager.js    ← Whitelist with in-memory cache
-│   ├── StatsEngine.js         ← Dual-layer stats (session + persistent)
-│   ├── BadgeManager.js        ← Debounced badge updates
-│   ├── AlarmManager.js        ← Daily reset scheduler
-│   └── ContextMenuManager.js  ← Right-click menu
+│   ├── index.js
+│   ├── RuleEngine.js
+│   ├── StatsEngine.js
+│   ├── BadgeManager.js
+│   ├── MessageRouter.js
+│   └── ...
+│
 ├── content/
-│   ├── index.js               ← Content coordinator (ISOLATED world)
-│   ├── CosmeticEngine.js      ← CSS injection + MutationObserver
-│   ├── PopupBlocker.js        ← window.open override (MAIN world)
-│   ├── AntiRedirect.js        ← URL tracking param cleaner
-│   └── ResourceObserver.js    ← PerformanceResourceTiming-based stat reporter
-├── shared/
-│   ├── constants.js           ← All constants (single source of truth)
-│   ├── messages.js            ← Typed message bus
-│   ├── storage.js             ← Storage abstraction with schema migration
-│   ├── utils.js               ← Pure utility functions
-│   ├── validator.js           ← Input validation
-│   └── logger.js              ← Structured logging with error persistence
+│   ├── CosmeticEngine.js
+│   ├── PopupBlocker.js
+│   ├── AntiRedirect.js
+│   └── ...
+│
 ├── popup/
-│   ├── index.html
-│   ├── popup.css
-│   └── index.js
-├── options/
-│   ├── index.html
-│   ├── options.css
-│   └── index.js
 ├── dashboard/
-│   ├── index.html
-│   ├── dashboard.css
-│   └── index.js
+├── options/
 ├── rules/
-│   ├── static_rules.json      ← 50 ad network rules
-│   └── privacy_rules.json     ← 30 tracker/analytics rules
-└── assets/
-    └── icons/
+├── assets/
+└── shared/
 ```
 
 ---
 
-## Installation (Developer Mode)
+# 🛠 Tech Stack
 
-1. Open Chrome/Brave/Edge and go to `chrome://extensions/`
-2. Enable **Developer mode** (top-right toggle)
-3. Click **Load unpacked**
-4. Select the `Ad Blocker Extension` folder (this directory)
-5. The ShieldBlock Pro icon appears in your toolbar
-
----
-
-## Architecture Decisions
-
-### Manifest V3 Compliance
-- All event listeners registered **synchronously at top level** — avoids MV3's ephemeral service worker pitfall
-- No `webRequest` API — uses `declarativeNetRequest` exclusively
-- Session state via `chrome.storage.session`, persistent state via `chrome.storage.local`
-
-### Rule ID Registry
-- Persistent `RuleIDRegistry` allocates unique integers per partition to prevent ID collisions across service worker restarts
-- Partitions: `SESSION_WHITELIST` (1–999), `CUSTOM_USER_RULES` (1000–9999)
-
-### Dual-Layer Statistics
-- **Session layer** (`chrome.storage.session`): per-tab ephemeral counters, cleared on browser restart
-- **Persistent layer** (`chrome.storage.local`): aggregate totals + 30-day history ring buffer
-
-### Content Script Architecture
-- **ISOLATED world** scripts: `index.js`, `CosmeticEngine.js`, `AntiRedirect.js`, `ResourceObserver.js` — can access `chrome.*` APIs
-- **MAIN world** script: `PopupBlocker.js` — has access to real `window.open` for effective popup blocking
+- JavaScript (ES6)
+- Manifest V3
+- Chrome Extensions API
+- DeclarativeNetRequest
+- Chrome Storage API
+- MutationObserver
+- CSS Selectors
 
 ---
 
-## Keyboard Shortcuts
+# 🚀 Installation
 
-| Shortcut | Action |
-|---|---|
-| `Alt+Shift+B` | Toggle ShieldBlock Pro on/off |
-| `Alt+Shift+P` | Pause blocking on current site |
-| `Alt+Shift+D` | Open Dashboard |
+```bash
+git clone https://github.com/Vikki-2006/ShieldBlock-Pro.git
+```
 
----
+Open Chrome
 
-## Permissions
+```
+chrome://extensions
+```
 
-| Permission | Reason |
-|---|---|
-| `declarativeNetRequest` | Block network requests |
-| `declarativeNetRequestFeedback` | Read matched rule stats |
-| `storage` | Persist settings and stats |
-| `tabs` | Get current tab URL |
-| `activeTab` | Access current tab info |
-| `webNavigation` | Reset badge on page load |
-| `scripting` | Inject content scripts |
-| `alarms` | Daily stats reset |
-| `contextMenus` | Right-click menu items |
-| `notifications` | (optional) Block alerts |
+Enable **Developer Mode**
+
+Click **Load unpacked**
+
+Select the project folder.
+
+Done ✅
 
 ---
 
-## License
+# 📋 Roadmap
 
-MIT License — see [LICENSE](LICENSE)
+- [ ] More filter lists
+- [ ] Custom filters
+- [ ] Sync settings
+- [ ] Backup & Restore
+- [ ] Advanced tracker protection
+- [ ] Performance improvements
+- [ ] AI-assisted rule suggestions
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
+
+1. Fork
+2. Create feature branch
+3. Commit
+4. Push
+5. Open Pull Request
+
+---
+
+# 📜 License
+
+Licensed under the MIT License.
+
+---
+
+<div align="center">
+
+Made with ❤️ by **Vigneshwaran**
+
+⭐ Star this repository if you found it useful.
+
+</div>
