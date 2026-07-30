@@ -27,6 +27,7 @@ export class StatsEngine {
    */
   async recordBlock({ tabId, domain, type = 'other', category = 'unknown', count = 1 }) {
     try {
+      statLog.info(`[StatsEngine] Recording block of ${domain} (${type}, ${category}, count: ${count}) on tab ${tabId}`);
       await Promise.all([
         this._updateSessionStats(tabId, domain, count),
         this._updatePersistentStats(domain, type, category, count),

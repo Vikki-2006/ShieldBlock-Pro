@@ -7,24 +7,24 @@
  * Never store state in module-level variables; always read from chrome.storage.
  */
 
-import { MessageRouter }      from './MessageRouter.js';
-import { RuleEngine }          from './RuleEngine.js';
-import { WhitelistManager }    from './WhitelistManager.js';
-import { StatsEngine }         from './StatsEngine.js';
-import { BadgeManager }        from './BadgeManager.js';
-import { AlarmManager }        from './AlarmManager.js';
-import { ContextMenuManager }  from './ContextMenuManager.js';
-import { runMigrations }       from '../shared/storage.js';
-import { bgLog }               from '../shared/logger.js';
-import { PAGES, ALARMS }       from '../shared/constants.js';
+import { MessageRouter } from './MessageRouter.js';
+import { RuleEngine } from './RuleEngine.js';
+import { WhitelistManager } from './WhitelistManager.js';
+import { StatsEngine } from './StatsEngine.js';
+import { BadgeManager } from './BadgeManager.js';
+import { AlarmManager } from './AlarmManager.js';
+import { ContextMenuManager } from './ContextMenuManager.js';
+import { runMigrations } from '../shared/storage.js';
+import { bgLog } from '../shared/logger.js';
+import { PAGES, ALARMS } from '../shared/constants.js';
 
 // ── Module singletons ─────────────────────────────────────────────────────────
-const ruleEngine       = new RuleEngine();
+const ruleEngine = new RuleEngine();
 const whitelistManager = new WhitelistManager();
-const statsEngine      = new StatsEngine();
-const badgeManager     = new BadgeManager();
-const alarmManager     = new AlarmManager(statsEngine);
-const contextMenu      = new ContextMenuManager(whitelistManager);
+const statsEngine = new StatsEngine();
+const badgeManager = new BadgeManager();
+const alarmManager = new AlarmManager(statsEngine);
+const contextMenu = new ContextMenuManager(whitelistManager, ruleEngine);
 
 // Pass deps to MessageRouter so handlers can call them
 const router = new MessageRouter({
@@ -124,11 +124,11 @@ chrome.commands.onCommand.addListener(async (command) => {
     if (!tab) return;
 
     if (command === 'toggle-extension') {
-      await router.handle({ type: 'popup/toggle' }, { tab }, () => {});
+      await router.handle({ type: 'popup/toggle' }, { tab }, () => { });
     }
     if (command === 'pause-site') {
       const domain = new URL(tab.url).hostname.replace(/^www\./, '');
-      await router.handle({ type: 'popup/pause', domain }, { tab }, () => {});
+      await router.handle({ type: 'popup/pause', domain }, { tab }, () => { });
     }
     if (command === 'open-dashboard') {
       chrome.tabs.create({ url: chrome.runtime.getURL(PAGES.DASHBOARD) });
@@ -163,3 +163,4 @@ chrome.storage.onChanged.addListener((changes, area) => {
     if (newValue) ruleEngine.syncCustomRules(newValue);
   }
 });
+

@@ -121,10 +121,10 @@ function updateUI() {
   // Domain display
   els.siteDomain.textContent = domain || 'Unknown site';
 
-  // Favicon
-  if (domain) {
-    const favicon = document.querySelector('.site-favicon');
-    favicon.innerHTML = `<img src="https://www.google.com/s2/favicons?domain=${domain}&sz=32" onerror="this.style.display='none'" alt="">`;
+  // Favicon (using a local SVG placeholder to satisfy Content Security Policy)
+  const favicon = document.querySelector('.site-favicon');
+  if (favicon) {
+    favicon.innerHTML = `<svg viewBox="0 0 16 16" fill="none" width="16" height="16" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="7"/><path d="M8 1v14M1 8h14M2.5 4.5h11M2.5 11.5h11M8 1c1.5 2 2.5 4.5 2.5 7s-1 5-2.5 7-2.5-4.5-2.5-7 1-5 2.5-7z"/></svg>`;
   }
 
   // Status text + label
@@ -245,7 +245,7 @@ function bindEvents() {
 
   // Open dashboard
   els.openDashboard?.addEventListener('click', () => {
-    chrome.tabs.create({ url: chrome.runtime.getURL('../dashboard/index.html') });
+    chrome.tabs.create({ url: chrome.runtime.getURL('dashboard/index.html') });
     window.close();
   });
 

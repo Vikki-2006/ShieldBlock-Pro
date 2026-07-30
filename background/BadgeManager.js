@@ -6,8 +6,8 @@
 
 import { bgLog }      from '../shared/logger.js';
 import { BADGE }      from '../shared/constants.js';
-import { badgeText }  from '../shared/utils.js';
-import { sessionGet } from '../shared/storage.js';
+import { badgeText, extractDomain, isDomainWhitelisted }  from '../shared/utils.js';
+import { sessionGet, getSettings, getWhitelist } from '../shared/storage.js';
 
 const SESSION_KEY = 'tabStats';
 
@@ -74,6 +74,23 @@ export class BadgeManager {
    */
   async _applyBadge(tabId) {
     try {
+      const settings = await getSettings();
+      if (settings.enabled === false) {
+        await this.setDisabled(tabId);
+        return;
+      }
+
+      const tab = await chrome.tabs.get(tabId);
+      const url = tab?.url || '';
+      if (url && url.startsWith('http')) {
+        const domain = extractDomain(url);
+        const whitelist = await getWhitelist();
+        if (isDomainWhitelisted(domain, whitelist)) {
+          await this.setPaused(tabId);
+          return;
+        }
+      }
+
       const session  = await sessionGet(SESSION_KEY);
       const tabStats = session[SESSION_KEY] ?? {};
       const count    = tabStats[tabId]?.count ?? 0;

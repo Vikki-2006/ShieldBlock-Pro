@@ -71,49 +71,6 @@
     }
   }, true); // Capture phase to intercept before page handlers
 
-  // ── Block auto-redirect scripts ─────────────────────────────────────────────
-
-  // Override location.replace and location.assign for common redirect attacks
-  const _originalReplace  = location.replace.bind(location);
-  const _originalAssign   = location.assign.bind(location);
-
-  Object.defineProperty(location, 'replace', {
-    value: function (url) {
-      if (_isSuspiciousRedirect(url)) {
-        console.debug('[ShieldBlock] Blocked location.replace to:', url);
-        return;
-      }
-      return _originalReplace(url);
-    },
-    writable: true,
-    configurable: true
-  });
-
-  Object.defineProperty(location, 'assign', {
-    value: function (url) {
-      if (_isSuspiciousRedirect(url)) {
-        console.debug('[ShieldBlock] Blocked location.assign to:', url);
-        return;
-      }
-      return _originalAssign(url);
-    },
-    writable: true,
-    configurable: true
-  });
-
-  function _isSuspiciousRedirect(url) {
-    if (!url || typeof url !== 'string') return false;
-    // Only block obvious ad-redirect patterns
-    const AD_REDIRECT_PATTERNS = [
-      /doubleclick\.net/i,
-      /googlesyndication\.com/i,
-      /adnxs\.com/i,
-      /rubiconproject\.com/i,
-      /openx\.net/i,
-      /casalemedia\.com/i
-    ];
-    return AD_REDIRECT_PATTERNS.some(p => p.test(url));
-  }
 
   // ── Block auto-opening via document.write ───────────────────────────────────
   // Some sites abuse document.write to inject popup scripts

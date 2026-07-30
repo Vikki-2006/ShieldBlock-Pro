@@ -4,10 +4,21 @@
  * calls to the appropriate manager. Type-safe, error-bounded.
  */
 
-import { MSG }            from '../shared/messages.js';
-import { getSettings }    from '../shared/storage.js';
-import { bgLog }          from '../shared/logger.js';
-import { PAGES }          from '../shared/constants.js';
+import { MSG } from '../shared/messages.js';
+import {
+  getSettings,
+  saveSettings,
+  saveWhitelist,
+  saveCustomRules,
+  resetAll,
+  getStats,
+  getHistory,
+  saveStats,
+  saveHistory
+} from '../shared/storage.js';
+import { bgLog } from '../shared/logger.js';
+import { PAGES } from '../shared/constants.js';
+import { extractDomain, isDomainWhitelisted, sortedEntries } from '../shared/utils.js';
 
 export class MessageRouter {
   /**
@@ -54,18 +65,16 @@ export class MessageRouter {
 
       case MSG.CONTENT_READY: {
         const { url } = msg;
-        const settings   = await getSettings();
-        const whitelist  = await whitelistManager.getList();
-        const { extractDomain } = await import('../shared/utils.js');
-        const domain     = extractDomain(url || '');
-        const { isDomainWhitelisted } = await import('../shared/utils.js');
+        const settings = await getSettings();
+        const whitelist = await whitelistManager.getList();
+        const domain = extractDomain(url || '');
         const whitelisted = isDomainWhitelisted(domain, whitelist);
 
         // Load cosmetic rules from storage
         const cosmeticRules = await ruleEngine.getCosmeticRules(domain);
 
         return {
-          enabled:      settings.enabled,
+          enabled: settings.enabled,
           whitelisted,
           settings,
           cosmeticRules
@@ -74,7 +83,17 @@ export class MessageRouter {
 
       case MSG.REPORT_STAT: {
         const { domain, type: resType, category, count = 1 } = msg;
-        const tabId = sender?.tab?.id;
+        let tabId = sender?.tab?.id;
+
+        if (!tabId) {
+          try {
+            const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true });
+            tabId = activeTab?.id;
+          } catch (err) {
+            bgLog.error('Failed to query active tab for REPORT_STAT', err);
+          }
+        }
+
         if (tabId && domain) {
           await statsEngine.recordBlock({ tabId, domain, type: resType, category, count });
           await badgeManager.update(tabId);
@@ -84,8 +103,18 @@ export class MessageRouter {
 
       case MSG.REPORT_POPUP_BLOCKED: {
         const { url } = msg;
-        const tabId = sender?.tab?.id;
+        let tabId = sender?.tab?.id;
         bgLog.info('Popup blocked', url);
+
+        if (!tabId) {
+          try {
+            const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true });
+            tabId = activeTab?.id;
+          } catch (err) {
+            bgLog.error('Failed to query active tab for REPORT_POPUP_BLOCKED', err);
+          }
+        }
+
         if (tabId) {
           await statsEngine.recordBlock({ tabId, domain: msg.domain || 'popup', type: 'popup', category: 'annoyances' });
           await badgeManager.update(tabId);
@@ -108,32 +137,43 @@ export class MessageRouter {
 
       case MSG.GET_TAB_STATUS: {
         const { tabId } = msg;
-        const settings  = await getSettings();
+        const settings = await getSettings();
         const whitelist = await whitelistManager.getList();
-        const session   = await statsEngine.getTabSession(tabId);
-        const { tab }   = await chrome.tabs.get(tabId).then(t => ({ tab: t })).catch(() => ({ tab: null }));
-        const url       = tab?.url || '';
-        const { extractDomain, isDomainWhitelisted } = await import('../shared/utils.js');
-        const domain    = extractDomain(url);
+        const session = await statsEngine.getTabSession(tabId);
+        const { tab } = await chrome.tabs.get(tabId).then(t => ({ tab: t })).catch(() => ({ tab: null }));
+        const url = tab?.url || '';
+        const domain = extractDomain(url);
         const whitelisted = isDomainWhitelisted(domain, whitelist);
 
         return {
-          enabled:    settings.enabled,
+          enabled: settings.enabled,
           whitelisted,
           domain,
           url,
-          count:      session?.count ?? 0,
-          domains:    session?.domains ?? []
+          count: session?.count ?? 0,
+          domains: session?.domains ?? []
         };
       }
 
       case MSG.TOGGLE_ENABLED: {
         const settings = await getSettings();
         settings.enabled = msg.enabled ?? !settings.enabled;
-        const { saveSettings } = await import('../shared/storage.js');
         await saveSettings(settings);
         await ruleEngine.onSettingsChanged(settings);
         bgLog.info('Extension toggled', settings.enabled ? 'ON' : 'OFF');
+
+        // Refresh the badge on all active/available tabs
+        try {
+          const tabs = await chrome.tabs.query({});
+          for (const t of tabs) {
+            if (t.id) {
+              await badgeManager.refreshFromStorage(t.id);
+            }
+          }
+        } catch (err) {
+          bgLog.error('Failed to refresh badges on toggle', err);
+        }
+
         return { enabled: settings.enabled };
       }
 
@@ -142,6 +182,19 @@ export class MessageRouter {
         if (!domain) throw new Error('No domain provided');
         await whitelistManager.addTemporary(domain, ruleEngine);
         bgLog.info('Site paused', domain);
+
+        // Refresh badge for tabs on this domain
+        try {
+          const tabs = await chrome.tabs.query({});
+          for (const t of tabs) {
+            if (t.id && t.url && extractDomain(t.url) === domain) {
+              await badgeManager.refreshFromStorage(t.id);
+            }
+          }
+        } catch (err) {
+          bgLog.error('Failed to refresh badges on pause', err);
+        }
+
         return { paused: true };
       }
 
@@ -150,6 +203,19 @@ export class MessageRouter {
         if (!domain) throw new Error('No domain provided');
         await whitelistManager.removeTemporary(domain, ruleEngine);
         bgLog.info('Site resumed', domain);
+
+        // Refresh badge for tabs on this domain
+        try {
+          const tabs = await chrome.tabs.query({});
+          for (const t of tabs) {
+            if (t.id && t.url && extractDomain(t.url) === domain) {
+              await badgeManager.refreshFromStorage(t.id);
+            }
+          }
+        } catch (err) {
+          bgLog.error('Failed to refresh badges on resume', err);
+        }
+
         return { resumed: true };
       }
 
@@ -162,7 +228,6 @@ export class MessageRouter {
 
       case MSG.UPDATE_SETTINGS: {
         const { settings } = msg;
-        const { saveSettings } = await import('../shared/storage.js');
         await saveSettings(settings);
         await ruleEngine.onSettingsChanged(settings);
         return { saved: true };
@@ -170,7 +235,6 @@ export class MessageRouter {
 
       case MSG.UPDATE_WHITELIST: {
         const { whitelist } = msg;
-        const { saveWhitelist } = await import('../shared/storage.js');
         await saveWhitelist(whitelist);
         whitelistManager.updateCache(whitelist);
         await ruleEngine.syncWhitelistRules(whitelist);
@@ -179,7 +243,6 @@ export class MessageRouter {
 
       case MSG.UPDATE_CUSTOM_RULES: {
         const { rules } = msg;
-        const { saveCustomRules } = await import('../shared/storage.js');
         await saveCustomRules(rules);
         await ruleEngine.syncCustomRules(rules);
         return { saved: true };
@@ -192,7 +255,6 @@ export class MessageRouter {
       }
 
       case MSG.RESET_ALL: {
-        const { resetAll } = await import('../shared/storage.js');
         await resetAll();
         await ruleEngine.init();
         bgLog.info('Full reset performed');
@@ -208,28 +270,22 @@ export class MessageRouter {
       // ── Dashboard → Background ─────────────────────────────────────────────
 
       case MSG.GET_STATS: {
-        const { getStats } = await import('../shared/storage.js');
         return await getStats();
       }
 
       case MSG.GET_HISTORY: {
-        const { getHistory } = await import('../shared/storage.js');
         return await getHistory();
       }
 
       case MSG.CLEAR_STATS: {
-        const { saveStats, saveHistory } = await import('../shared/storage.js');
-        const { DEFAULTS } = { DEFAULTS: { stats: { total:0,byType:{},byDomain:{},byCategory:{} }, history: { days:[], lastResetDate:'' } } };
-        await saveStats({ total:0, byType:{script:0,image:0,stylesheet:0,xmlhttprequest:0,media:0,ping:0,other:0}, byDomain:{}, byCategory:{ads:0,trackers:0,analytics:0,annoyances:0,unknown:0} });
+        await saveStats({ total: 0, byType: { script: 0, image: 0, stylesheet: 0, xmlhttprequest: 0, media: 0, ping: 0, other: 0 }, byDomain: {}, byCategory: { ads: 0, trackers: 0, analytics: 0, annoyances: 0, unknown: 0 } });
         await saveHistory({ days: [], lastResetDate: '' });
         bgLog.info('Stats cleared');
         return { cleared: true };
       }
 
       case MSG.GET_TOP_DOMAINS: {
-        const { getStats } = await import('../shared/storage.js');
         const stats = await getStats();
-        const { sortedEntries } = await import('../shared/utils.js');
         return sortedEntries(stats.byDomain ?? {}, 20);
       }
 

@@ -192,18 +192,20 @@ export async function saveHistory(history) {
  * Called once on service worker startup.
  */
 export async function runMigrations() {
-  const { _version } = await storageGet('_version');
+  // Query raw storage directly from chrome.storage.local to bypass defaults injection
+  const raw = await chrome.storage.local.get('_version');
+  const _version = raw._version;
   if (_version === STORAGE_VERSION) return; // Up to date
 
   // v0 → v1: Initialize with defaults
   if (!_version || _version < 1) {
-    const existing = await storageGet(Object.keys(DEFAULTS));
+    const existing = await chrome.storage.local.get(Object.keys(DEFAULTS));
     const migrated = {};
     for (const [k, v] of Object.entries(DEFAULTS)) {
       migrated[k] = deepMerge(deepClone(v), existing[k] ?? {});
     }
     migrated._version = 1;
-    await storageSet(migrated);
+    await chrome.storage.local.set(migrated);
   }
 }
 

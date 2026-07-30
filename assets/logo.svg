@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Left shield gradient (Medium indigo-purple) -->
+    <linearGradient id="shieldLeftGrad" x1="256" y1="80" x2="110" y2="440" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#462bb7" />
+      <stop offset="100%" stop-color="#140656" />
+    </linearGradient>
+    <!-- Right shield gradient (Brighter violet-purple) -->
+    <linearGradient id="shieldRightGrad" x1="256" y1="80" x2="402" y2="440" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#603df8" />
+      <stop offset="100%" stop-color="#240c94" />
+    </linearGradient>
+    
+    <!-- Checkmark Left Facet Gradient -->
+    <linearGradient id="checkLeft" x1="142" y1="210" x2="256" y2="290" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0066ff" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+    <!-- Checkmark Right Main Facet Gradient -->
+    <linearGradient id="checkRightMain" x1="256" y1="172" x2="352" y2="290" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#e0f2fe" />
+      <stop offset="100%" stop-color="#7dd3fc" />
+    </linearGradient>
+    <!-- Checkmark Tail Facet Gradient -->
+    <linearGradient id="checkTail" x1="230" y1="360" x2="256" y2="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0ea5e9" />
+    </linearGradient>
+    <!-- Checkmark Right Bottom Facet Gradient -->
+    <linearGradient id="checkRightBottom" x1="230" y1="360" x2="352" y2="260" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Shield Left Half -->
+  <path d="M256 80 L110 140 C110 260 140 370 256 440 Z" fill="url(#shieldLeftGrad)" />
+  
+  <!-- Shield Right Half -->
+  <path d="M256 80 L402 140 C402 260 372 370 256 440 Z" fill="url(#shieldRightGrad)" />
+
+  <!-- Shield Outline Overlay for crisp edges -->
+  <path d="M256 80 L110 140 C110 260 140 370 256 440 C372 370 402 260 402 140 Z" stroke="rgba(255, 255, 255, 0.08)" stroke-width="4" stroke-linejoin="round" />
+
+  <!-- Checkmark Facet 1 (Left Wing) -->
+  <path d="M142 210 L236 290 L256 260 Z" fill="url(#checkLeft)" />
+
+  <!-- Checkmark Facet 2 (Right Wing Main) -->
+  <path d="M236 290 L352 172 L256 260 Z" fill="url(#checkRightMain)" />
+
+  <!-- Checkmark Facet 3 (Bottom Tail) -->
+  <path d="M236 290 L256 260 L230 360 Z" fill="url(#checkTail)" />
+
+  <!-- Checkmark Facet 4 (Right Wing Bottom) -->
+  <path d="M256 260 L352 172 L315 268 L230 360 Z" fill="url(#checkRightBottom)" />
+</svg>

@@ -10,9 +10,11 @@ import { extractDomain } from '../shared/utils.js';
 export class ContextMenuManager {
   /**
    * @param {import('./WhitelistManager.js').WhitelistManager} whitelistManager
+   * @param {import('./RuleEngine.js').RuleEngine} ruleEngine
    */
-  constructor(whitelistManager) {
+  constructor(whitelistManager, ruleEngine) {
     this._whitelist = whitelistManager;
+    this._ruleEngine = ruleEngine;
   }
 
   /**
@@ -66,19 +68,15 @@ export class ContextMenuManager {
       switch (menuItemId) {
         case CONTEXT_MENU.WHITELIST_SITE: {
           if (!domain) return;
-          const { RuleEngine } = await import('./RuleEngine.js');
-          // We use a fresh import here since ContextMenuManager doesn't hold a ruleEngine ref
-          // In production, wire this through the service worker index.js
           bgLog.info('Whitelist site clicked for', domain);
-          // Send message to self to trigger whitelist add
-          chrome.runtime.sendMessage({ type: 'options/whitelist', whitelist: [domain] });
+          await this._whitelist.add(domain, this._ruleEngine);
           break;
         }
 
         case CONTEXT_MENU.PAUSE_EXTENSION: {
-          if (!domain || !tab?.id) return;
-          chrome.runtime.sendMessage({ type: 'popup/pause', domain, tabId: tab.id });
+          if (!domain) return;
           bgLog.info('Pause extension clicked for', domain);
+          await this._whitelist.addTemporary(domain, this._ruleEngine);
           break;
         }
 

@@ -100,7 +100,12 @@ export const MSG = Object.freeze({
  */
 export async function sendToBackground(type, payload = {}) {
   try {
-    return await chrome.runtime.sendMessage({ type, ...payload });
+    const response = await chrome.runtime.sendMessage({ type, ...payload });
+    if (response && typeof response === 'object') {
+      if (response.ok) return response.data;
+      throw new Error(response.error || 'Unknown background error');
+    }
+    return response;
   } catch (err) {
     // If the service worker was terminated, this will throw.
     // In that case, the extension will simply not get a response.

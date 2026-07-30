@@ -63,17 +63,10 @@
     // - transferSize === 0 (no bytes received)
     // - encodedBodySize === 0 (no body)
     // - fetchStart > 0 (request was initiated)
-    // - duration > 0 OR connectEnd === 0 (connection never completed)
     return (
       entry.transferSize === 0 &&
       entry.encodedBodySize === 0 &&
-      entry.fetchStart > 0 &&
-      entry.connectEnd === 0 &&
-      (entry.initiatorType === 'script' ||
-       entry.initiatorType === 'img' ||
-       entry.initiatorType === 'xmlhttprequest' ||
-       entry.initiatorType === 'fetch' ||
-       entry.initiatorType === 'iframe')
+      entry.fetchStart > 0
     );
   }
 

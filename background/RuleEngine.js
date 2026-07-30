@@ -7,9 +7,10 @@
 import { RuleIDRegistry }          from './RuleIDRegistry.js';
 import { ruleLog }                 from '../shared/logger.js';
 import { RULE_PRIORITY, BLOCKABLE_RESOURCE_TYPES, STATIC_RULESET_IDS, RULE_TYPES } from '../shared/constants.js';
-import { getCustomRules, storageGet, storageSet } from '../shared/storage.js';
+import { getCustomRules, getWhitelist, getSettings, storageGet, storageSet } from '../shared/storage.js';
 import { generateCustomRuleId }    from '../shared/utils.js';
 import { validateImportText }      from '../shared/validator.js';
+import { FilterParser }            from './FilterParser.js';
 
 const COSMETIC_STORAGE_KEY = 'cosmeticRules';
 
@@ -29,9 +30,27 @@ export class RuleEngine {
     if (this._initialized) return;
     try {
       await this._idRegistry.load();
-      await this._verifyStaticRulesets();
-      const rules = await getCustomRules();
-      await this._applyCustomRules(rules.filter(r => r.enabled));
+      const settings = await getSettings();
+      if (settings.enabled !== false) {
+        const adsEnabled = settings.filters?.ads !== false;
+        const privacyEnabled = settings.filters?.privacy !== false;
+        await this.toggleStaticRuleset(STATIC_RULESET_IDS.ADS, adsEnabled);
+        await this.toggleStaticRuleset(STATIC_RULESET_IDS.PRIVACY, privacyEnabled);
+        const rules = await getCustomRules();
+        await this._applyCustomRules(rules.filter(r => r.enabled));
+      } else {
+        // Ensure everything is disabled in DNR
+        await this.toggleStaticRuleset(STATIC_RULESET_IDS.ADS, false);
+        await this.toggleStaticRuleset(STATIC_RULESET_IDS.PRIVACY, false);
+        const existingIds = await this._idRegistry.getPartitionIds('CUSTOM_USER_RULES');
+        if (existingIds.length > 0) {
+          await chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds: existingIds });
+        }
+        const sessionIds = await this._idRegistry.getPartitionIds('SESSION_WHITELIST');
+        if (sessionIds.length > 0) {
+          await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: sessionIds });
+        }
+      }
       this._initialized = true;
       ruleLog.info('RuleEngine initialized');
     } catch (err) {
@@ -248,12 +267,36 @@ export class RuleEngine {
    */
   async onSettingsChanged(settings) {
     try {
-      // Toggle filter rulesets based on settings
-      if (typeof settings.filters?.ads === 'boolean') {
-        await this.toggleStaticRuleset(STATIC_RULESET_IDS.ADS, settings.filters.ads);
-      }
-      if (typeof settings.filters?.privacy === 'boolean') {
-        await this.toggleStaticRuleset(STATIC_RULESET_IDS.PRIVACY, settings.filters.privacy);
+      if (settings.enabled === false) {
+        // Disable everything in DNR
+        await this.toggleStaticRuleset(STATIC_RULESET_IDS.ADS, false);
+        await this.toggleStaticRuleset(STATIC_RULESET_IDS.PRIVACY, false);
+        
+        const existingIds = await this._idRegistry.getPartitionIds('CUSTOM_USER_RULES');
+        if (existingIds.length > 0) {
+          await chrome.declarativeNetRequest.updateDynamicRules({ removeRuleIds: existingIds });
+        }
+        
+        const sessionIds = await this._idRegistry.getPartitionIds('SESSION_WHITELIST');
+        if (sessionIds.length > 0) {
+          await chrome.declarativeNetRequest.updateSessionRules({ removeRuleIds: sessionIds });
+        }
+        ruleLog.info('ShieldBlock Pro globally disabled: rules removed from DNR');
+      } else {
+        // Enable based on filters settings
+        const adsEnabled = settings.filters?.ads !== false;
+        const privacyEnabled = settings.filters?.privacy !== false;
+        await this.toggleStaticRuleset(STATIC_RULESET_IDS.ADS, adsEnabled);
+        await this.toggleStaticRuleset(STATIC_RULESET_IDS.PRIVACY, privacyEnabled);
+
+        // Sync custom rules
+        const rules = await getCustomRules();
+        await this._applyCustomRules(rules.filter(r => r.enabled));
+
+        // Sync whitelist
+        const whitelist = await getWhitelist();
+        await this.syncWhitelistRules(whitelist);
+        ruleLog.info('ShieldBlock Pro globally enabled: rules synced to DNR');
       }
       ruleLog.debug('Settings applied to RuleEngine');
     } catch (err) {
@@ -321,7 +364,6 @@ export class RuleEngine {
    * @returns {{ imported: number, skipped: number, errors: number }}
    */
   async importFilterText(rawText) {
-    const { FilterParser } = await import('./FilterParser.js');
     const parser = new FilterParser();
     const result = parser.parse(rawText);
 
