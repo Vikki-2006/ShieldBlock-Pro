@@ -39,26 +39,28 @@ A modern privacy-first browser extension built with Manifest V3 that blocks adve
 
 # 📸 Screenshots
 
+---
+
 ## 🛡️ Popup
 
 <p align="center">
-<img src="assets/screenshots/popup.png" width="320" alt="Popup">
+<img src="assets/screenshots/popup.png" width="360" alt="ShieldBlock Pro Popup">
 </p>
 
 <p align="center">
-Quick protection controls, live statistics, recent blocked requests and one-click access to Dashboard & Settings.
+Compact popup providing instant protection controls, live blocking statistics, recent activity, and quick access to the Dashboard and Settings.
 </p>
 
 ---
 
-## 📊 Dashboard
+## 📊 Statistics Dashboard
 
 <p align="center">
-<img src="assets/screenshots/dashboard.png" alt="Dashboard">
+<img src="assets/screenshots/dashboard.png" alt="ShieldBlock Pro Dashboard">
 </p>
 
 <p align="center">
-Comprehensive analytics showing blocked requests, activity history, domains, trackers and usage statistics.
+Interactive analytics dashboard with real-time request statistics, activity history, blocked domains, request type breakdown, and live monitoring.
 </p>
 
 ---
@@ -70,7 +72,7 @@ Comprehensive analytics showing blocked requests, activity history, domains, tra
 </p>
 
 <p align="center">
-Customize themes, accent colors and animations to personalize ShieldBlock Pro.
+Personalize ShieldBlock Pro with dark/light themes, multiple accent colors, and smooth UI animations.
 </p>
 
 ---
@@ -82,7 +84,7 @@ Customize themes, accent colors and animations to personalize ShieldBlock Pro.
 </p>
 
 <p align="center">
-Enable or disable built-in protection modules including Ad Blocking, Privacy Protection, Cosmetic Filtering, Popup Blocking and URL Cleaner.
+Enable or disable individual protection modules including Network Ad Blocking, Privacy Protection, Cosmetic Filtering, Popup Blocking, and URL Cleaning.
 </p>
 
 ---
@@ -90,11 +92,11 @@ Enable or disable built-in protection modules including Ad Blocking, Privacy Pro
 ## ℹ️ About
 
 <p align="center">
-<img src="assets/screenshots/about.png" alt="About">
+<img src="assets/screenshots/about.png" alt="About ShieldBlock Pro">
 </p>
 
 <p align="center">
-Extension information, version details and protection statistics.
+Displays extension version, active rules, total blocked requests, custom rule count, and project information.
 </p>
 
 ---
