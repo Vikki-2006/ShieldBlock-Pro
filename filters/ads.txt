@@ -1,0 +1,551 @@
+! ShieldBlock Pro — Ad Filter List
+! Format: EasyList-compatible (domain anchor rules only)
+! Compiler: scripts/filter-compiler.js
+! Categories: Ads, Display, Video, Mobile, Shopping, Programmatic
+!
+! ============================================================================
+! GOOGLE ADS ECOSYSTEM
+! ============================================================================
+||googlesyndication.com^
+||pagead2.googlesyndication.com^
+||tpc.googlesyndication.com^
+||adservice.google.com^
+||adservice.google.co.uk^
+||adservice.google.ca^
+||adservice.google.de^
+||adservice.google.fr^
+||adservice.google.co.in^
+||adservice.google.com.au^
+||adservice.google.co.jp^
+||adservice.google.com.br^
+||adservice.google.es^
+||adservice.google.it^
+||googleadservices.com^
+||doubleclick.net^
+||ad.doubleclick.net^
+||securepubads.g.doubleclick.net^
+||stats.g.doubleclick.net^
+||td.doubleclick.net^
+||2mdn.net^
+||ads.google.com^
+||adwords.google.com^
+||googletagservices.com^
+!
+! ============================================================================
+! AMAZON ADVERTISING
+! ============================================================================
+||amazon-adsystem.com^
+||adsystem.amazon.com^
+||aax.amazon-adsystem.com^
+||mads.amazon-adsystem.com^
+||s.amazon-adsystem.com^
+||c.amazon-adsystem.com^
+||z-na.amazon-adsystem.com^
+||z-eu.amazon-adsystem.com^
+||aax-eu.amazon-adsystem.com^
+||fls-eu.amazon-adsystem.com^
+||fls-na.amazon-adsystem.com^
+!
+! ============================================================================
+! APPLOVIN
+! ============================================================================
+||applovin.com^
+||d.applovin.com^
+||rt.applovin.com^
+||p.applovin.com^
+||e.applovin.com^
+||a.applovin.com^
+||img.applovin.com^
+||pdn.applovin.com^
+||sdkapi.applovin.com^
+!
+! ============================================================================
+! UNITY ADS
+! ============================================================================
+||unityads.unity3d.com^
+||ads.unityads.unity3d.com^
+||config.unityads.unity3d.com^
+||auction.unityads.unity3d.com^
+||publisher.unityads.unity3d.com^
+||unityads.com^
+||unity3d.com/ads^
+!
+! ============================================================================
+! IRONSOURCE
+! ============================================================================
+||ironsource.com^
+||iron-source.com^
+||supersonic.com^
+||supply.supersonic.com^
+||sdk.supersonic.com^
+||infra.supersonic.com^
+||mediation.supersonic.com^
+||api.ironsrc.com^
+||sdk.api.ironsrc.com^
+||is2.mopub.com^
+!
+! ============================================================================
+! VUNGLE
+! ============================================================================
+||vungle.com^
+||api.vungle.com^
+||cdn.vungle.com^
+||dashapi.vungle.com^
+||video.vungle.com^
+||origin-elb.vungle.com^
+||liftoff.io^
+||a.liftoff.io^
+!
+! ============================================================================
+! MINTEGRAL / MINDWORKS
+! ============================================================================
+||mintegral.com^
+||cdn-adn.rayjump.com^
+||cdn-adn-https.rayjump.com^
+||adnet.yy.com^
+||mtrack.mintegral.com^
+||adn.mintegral.com^
+!
+! ============================================================================
+! CHARTBOOST
+! ============================================================================
+||chartboost.com^
+||live.chartboost.com^
+||sdk.chartboost.com^
+!
+! ============================================================================
+! INMOBI
+! ============================================================================
+||inmobi.com^
+||sync.inmobi.com^
+||api.inmobi.com^
+||cdn.inmobi.com^
+||i.inmobi.com^
+||m.inmobi.com^
+||inmobi.sg^
+!
+! ============================================================================
+! START.IO (FORMERLY STARTAPP)
+! ============================================================================
+||start.io^
+||startapp.com^
+||data.start.io^
+||i.startapp.com^
+!
+! ============================================================================
+! MOLOCO
+! ============================================================================
+||moloco.com^
+||ad.ad-srv.net^
+||moloco.cloud^
+!
+! ============================================================================
+! APPNEXUS / XANDR
+! ============================================================================
+||adnxs.com^
+||cdn.adnxs.com^
+||ib.adnxs.com^
+||ym.adsrvr.org^
+||appnexus.com^
+||xandr.com^
+!
+! ============================================================================
+! THE TRADE DESK
+! ============================================================================
+||adsrvr.org^
+||match.adsrvr.org^
+||js.adsrvr.org^
+||thetradedesk.com^
+!
+! ============================================================================
+! RUBICON PROJECT / MAGNITE
+! ============================================================================
+||rubiconproject.com^
+||fastlane.rubiconproject.com^
+||eus.rubiconproject.com^
+||magnite.com^
+!
+! ============================================================================
+! PUBMATIC
+! ============================================================================
+||pubmatic.com^
+||ads.pubmatic.com^
+||image6.pubmatic.com^
+||simage2.pubmatic.com^
+||image2.pubmatic.com^
+||aax.pubmatic.com^
+!
+! ============================================================================
+! OPENX
+! ============================================================================
+||openx.net^
+||deliver.openx.net^
+||sjc.ads.openx.net^
+!
+! ============================================================================
+! INDEX EXCHANGE
+! ============================================================================
+||indexexchange.com^
+||csx.indexexchange.com^
+||js-sec.indexww.com^
+||htlb.casalemedia.com^
+||casalemedia.com^
+!
+! ============================================================================
+! CRITEO
+! ============================================================================
+||criteo.com^
+||rtax.criteo.com^
+||static.criteo.net^
+||bidder.criteo.com^
+||gum.criteo.com^
+||dis.us.criteo.com^
+||sslwidget.criteo.com^
+!
+! ============================================================================
+! TABOOLA
+! ============================================================================
+||taboola.com^
+||cdn.taboola.com^
+||trc.taboola.com^
+||ad.taboola.com^
+||nr-data.taboola.com^
+!
+! ============================================================================
+! OUTBRAIN
+! ============================================================================
+||outbrain.com^
+||widgets.outbrain.com^
+||amplify.outbrain.com^
+||log.outbrain.com^
+!
+! ============================================================================
+! REVCONTENT
+! ============================================================================
+||revcontent.com^
+||trends.revcontent.com^
+||api.revcontent.com^
+!
+! ============================================================================
+! MEDIA.NET
+! ============================================================================
+||media.net^
+||contextual.media.net^
+||data.media.net^
+||uapi.media.net^
+||static.media.net^
+||qsearch.media.net^
+!
+! ============================================================================
+! SHARETHROUGH
+! ============================================================================
+||sharethrough.com^
+||native.sharethrough.com^
+||btlr.sharethrough.com^
+!
+! ============================================================================
+! TRIPLELIFT
+! ============================================================================
+||triplelift.com^
+||tlx.3lift.com^
+||eb2.3lift.com^
+||3lift.com^
+!
+! ============================================================================
+! SOVRN / LIJIT
+! ============================================================================
+||sovrn.com^
+||lijit.com^
+||ap.lijit.com^
+!
+! ============================================================================
+! 33ACROSS
+! ============================================================================
+||33across.com^
+||ssc.33across.com^
+||ssc-cms.33across.com^
+!
+! ============================================================================
+! SMARTADSERVER
+! ============================================================================
+||smartadserver.com^
+||eas.smartadserver.com^
+||prg.smartadserver.com^
+!
+! ============================================================================
+! ADFORM
+! ============================================================================
+||adform.net^
+||adform.com^
+||track.adform.net^
+!
+! ============================================================================
+! YIELDMO
+! ============================================================================
+||yieldmo.com^
+||paapi.yieldmo.com^
+!
+! ============================================================================
+! GUMGUM
+! ============================================================================
+||gumgum.com^
+||g2.gumgum.com^
+||match.gumgum.com^
+!
+! ============================================================================
+! UNDERTONE
+! ============================================================================
+||undertone.com^
+||cdn.undertone.com^
+!
+! ============================================================================
+! UNRULY
+! ============================================================================
+||unrulymedia.com^
+||targeting.unrulymedia.com^
+||video.unrulymedia.com^
+!
+! ============================================================================
+! TEADS
+! ============================================================================
+||teads.tv^
+||t.teads.tv^
+||a.teads.tv^
+||c.teads.tv^
+||ping.teads.tv^
+!
+! ============================================================================
+! SPOTX / MAGNITE
+! ============================================================================
+||spotxchange.com^
+||spotx.tv^
+||search.spotxchange.com^
+!
+! ============================================================================
+! FREEWHEEL / COMCAST
+! ============================================================================
+||fwmrm.net^
+||freewheel.tv^
+||v.fwmrm.net^
+||7999.fwmrm.net^
+||ads.freewheel.tv^
+!
+! ============================================================================
+! SPRINGSERVE
+! ============================================================================
+||springserve.com^
+||sync.springserve.com^
+!
+! ============================================================================
+! INNOVID
+! ============================================================================
+||innovid.com^
+||ad.innovid.com^
+||ids.innovid.com^
+!
+! ============================================================================
+! IPONWEB / BIDSWITCH
+! ============================================================================
+||iponweb.net^
+||bidswitch.net^
+||match.bidswitch.net^
+!
+! ============================================================================
+! MOAT ANALYTICS / ORACLE
+! ============================================================================
+||moatads.com^
+||moat.com^
+||z.moatads.com^
+||j.moatads.com^
+||b.moatads.com^
+!
+! ============================================================================
+! DOUBLEVERIFY
+! ============================================================================
+||doubleverify.com^
+||cdn.doubleverify.com^
+||pixel.doubleverify.com^
+!
+! ============================================================================
+! INTEGRAL AD SCIENCE (IAS)
+! ============================================================================
+||integralads.com^
+||pixel.adsafeprotected.com^
+||adsafeprotected.com^
+||sb.scorecardresearch.com^
+!
+! ============================================================================
+! HUMAN / WHITE OPS
+! ============================================================================
+||humansecurity.com^
+||whiteops.com^
+||p.adsymptotic.com^
+!
+! ============================================================================
+! BOMBORA
+! ============================================================================
+||bombora.com^
+||data.bombora.com^
+!
+! ============================================================================
+! MEDIAMATH
+! ============================================================================
+||mediamath.com^
+||match.mathtag.com^
+||mathtag.com^
+!
+! ============================================================================
+! ADROLL
+! ============================================================================
+||adroll.com^
+||d.adroll.com^
+||s.adroll.com^
+!
+! ============================================================================
+! YANDEX ADVERTISING
+! ============================================================================
+||an.yandex.ru^
+||adfox.ru^
+||adfox.yandex.ru^
+||partner.yandex.ru^
+!
+! ============================================================================
+! VERIZON MEDIA / OATH
+! ============================================================================
+||advertising.com^
+||nexage.com^
+||brightroll.com^
+||ads.brightroll.com^
+||turn.com^
+||ad.turn.com^
+||conversantmedia.com^
+||dotomi.com^
+!
+! ============================================================================
+! VIDEO AD NETWORKS
+! ============================================================================
+||vidazoo.com^
+||jwpltx.com^
+||jwpsrv.com^
+||jwplatform.com/^*/ads/^
+||tremormedia.com^
+||tremor-video.com^
+||tidaltv.com^
+||aniview.com^
+||adswizz.com^
+||smartstream.tv^
+||smartclip.net^
+||loopme.com^
+||rhythmone.com^
+||1rx.io^
+||vertamedia.com^
+||yieldbird.com^
+||nend.net^
+!
+! ============================================================================
+! MOBILE AD NETWORKS
+! ============================================================================
+||adcolony.com^
+||ads.adcolony.com^
+||adc3-launch.adcolony.com^
+||mopub.com^
+||ads.mopub.com^
+||emxdgt.com^
+||smaato.net^
+||supply.smaato.com^
+||stickyadstv.com^
+||fam.stickyadstv.com^
+||verve.com^
+||pubnative.net^
+||ads.pubnative.net^
+!
+! ============================================================================
+! PROPELLERADS / POP ADS
+! ============================================================================
+||propellerads.com^
+||pop.propellerads.com^
+||traffic.propellerads.com^
+||popcash.net^
+||popads.net^
+||popcornads.com^
+||trafficjunky.net^
+||trafficfactory.biz^
+||exoclick.com^
+||juicyads.com^
+!
+! ============================================================================
+! SOCIAL ADS
+! ============================================================================
+||ads.twitter.com^
+||static.ads-twitter.com^
+||syndication.twitter.com^
+||ads.linkedin.com^
+||snap.licdn.com^
+||ads.reddit.com^
+||alb.reddit.com^
+||ads.snapchat.com^
+||businessad.tiktok.com^
+||ads.yahoo.com^
+||onemobile.yahoo.com^
+||gemini.yahoo.com^
+!
+! ============================================================================
+! FACEBOOK ADS
+! ============================================================================
+||connect.facebook.net^
+||static.xx.fbcdn.net/^*/fbevents.js^
+!
+! ============================================================================
+! NATIVE ADVERTISING
+! ============================================================================
+||mgid.com^
+||content.ad^
+||adblade.com^
+||adblade.net^
+||revcontent.com^
+||content-ad.net^
+!
+! ============================================================================
+! SHOPPING ADS
+! ============================================================================
+||ads.amazon.com^
+||target.walmartlabs.com^
+||dynamic-ads.pinterest.com^
+!
+! ============================================================================
+! PROGRAMMATIC / MISC
+! ============================================================================
+||semasio.net^
+||adscale.de^
+||flashtalking.com^
+||sizmek.com^
+||adzerk.net^
+||adzerk.com^
+||admixer.net^
+||adtelligent.com^
+||e.nexac.com^
+||nexac.com^
+||adtech.de^
+||sprinklr.com/^*/ads/^
+||mgid.net^
+||mgid.ru^
+||smadex.com^
+||digital.condenast.com^
+||gads.pubmatic.com^
+!
+! ============================================================================
+! TARGETED AD BLOCK TEST COMPATIBILITY
+! ============================================================================
+||ads.youtube.com^
+||partnerads.ysm.yahoo.com^
+||adtech.yahoo.com^
+||bdapi-ads.realmemobile.com^
+||bdapi-in-ads.realmemobile.com^
+||adsfs.oppomobile.com^
+||ck.ads.oppomobile.com^
+||api-adservices.apple.com^
+*/ads.js$script
+*/pagead.js$script
+||advice-ads.s3.amazonaws.com^
+||adtech.yahooinc.com^
+||adx.ads.oppomobile.com^

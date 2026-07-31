@@ -35,14 +35,21 @@ const TYPE_COLORS = {
 async function init() {
   await render();
 
-  // Live updates via storage changes
+  // Live updates via storage changes (handles settings changes from other pages)
   chrome.storage.onChanged.addListener(async (changes, area) => {
     if (area === 'local' && (changes.stats || changes.history)) {
       await render();
     }
   });
 
-  // Poll session data (recent blocked) every 2 seconds
+  // Real-time push: refresh immediately when background signals a new block
+  chrome.runtime.onMessage.addListener((message) => {
+    if (message.type === 'background/statsUpdated') {
+      render().catch(() => {});
+    }
+  });
+
+  // Poll session data (recent blocked) every 2 seconds as fallback
   setInterval(loadFeed, 2000);
 
   // Button events

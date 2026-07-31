@@ -9,6 +9,7 @@ import { statLog }            from '../shared/logger.js';
 import { getStats, saveStats, getHistory, saveHistory, sessionGet, sessionSet } from '../shared/storage.js';
 import { todayString, updateFrequencyMap } from '../shared/utils.js';
 import { STATS_LIMITS }       from '../shared/constants.js';
+import { MSG }                from '../shared/messages.js';
 
 const SESSION_KEY = 'tabStats';
 const RECENT_KEY  = 'recentBlocked';
@@ -33,8 +34,27 @@ export class StatsEngine {
         this._updatePersistentStats(domain, type, category, count),
         this._appendRecentBlocked(domain, type, category)
       ]);
+      // Push real-time notification to popup and dashboard
+      this._notifyPages({ tabId, domain, category });
     } catch (err) {
       statLog.error('recordBlock failed', err);
+    }
+  }
+
+  /**
+   * Broadcast a STATS_UPDATED message to all open extension pages.
+   * Uses fire-and-forget — errors are silently ignored (no listener = no harm).
+   *
+   * @param {{ tabId: number, domain: string, category: string }} payload
+   * @private
+   */
+  _notifyPages(payload) {
+    try {
+      chrome.runtime.sendMessage({ type: MSG.STATS_UPDATED, ...payload }).catch(() => {
+        // Popup / dashboard may not be open — that's fine
+      });
+    } catch {
+      // Ignore — no listeners registered
     }
   }
 

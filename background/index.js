@@ -17,6 +17,7 @@ import { ContextMenuManager } from './ContextMenuManager.js';
 import { runMigrations } from '../shared/storage.js';
 import { bgLog } from '../shared/logger.js';
 import { PAGES, ALARMS } from '../shared/constants.js';
+import { extractDomain } from '../shared/utils.js';
 
 // ── Module singletons ─────────────────────────────────────────────────────────
 const ruleEngine = new RuleEngine();
@@ -163,4 +164,56 @@ chrome.storage.onChanged.addListener((changes, area) => {
     if (newValue) ruleEngine.syncCustomRules(newValue);
   }
 });
+
+const ruleMatchedEvent = chrome.declarativeNetRequest.onRuleMatchedDebug || chrome.declarativeNetRequest.onRuleMatched;
+if (ruleMatchedEvent) {
+  ruleMatchedEvent.addListener(async (info) => {
+    try {
+      // Chrome MV3 onRuleMatchedDebug info shape:
+      //   Newer Chrome:  { request: { tabId, url, type, initiator }, rule: { rulesetId, ruleId } }
+      //   Older Chrome:  { tabId, url, type, rule: { rulesetId, ruleId } }
+      // Always normalise to a flat shape so the rest of the handler is version-agnostic.
+      const req      = info.request ?? info;           // prefer info.request
+      const tabId    = req.tabId    ?? info.tabId;
+      const url      = req.url      ?? info.url ?? '';
+      const resType  = req.type     ?? info.type ?? 'other';
+      const rule     = info.rule    ?? {};
+      const rulesetId = rule.rulesetId ?? '';
+
+      if (!url || !tabId || tabId === -1) return;
+
+      const domain = extractDomain(url);
+
+      // Determine category based on rulesetId and URL content
+      let category = 'unknown';
+      if (rulesetId === 'ads') {
+        category = 'ads';
+      } else if (rulesetId === 'privacy') {
+        // Heuristic: analytics tools vs general trackers
+        const analyticsKeywords = ['analytics', 'gtm', 'gtag', 'metric', 'telemetry', 'measure'];
+        const isAnalytics = analyticsKeywords.some(kw => url.includes(kw) || domain.includes(kw));
+        category = isAnalytics ? 'analytics' : 'trackers';
+      } else {
+        // Dynamic / custom rules — guess from domain
+        const adKeywords = ['ad', 'ads', 'advert', 'banner', 'sponsor', 'promo'];
+        category = adKeywords.some(kw => domain.includes(kw)) ? 'ads' : 'trackers';
+      }
+
+      bgLog.info('DNR Block matched', { url, domain, rulesetId, tabId, category });
+
+      await statsEngine.recordBlock({
+        tabId,
+        domain,
+        type: resType || 'other',
+        category,
+        count: 1
+      });
+
+      await badgeManager.update(tabId);
+    } catch (err) {
+      bgLog.error('onRuleMatched handler failed', err);
+    }
+  });
+}
+
 

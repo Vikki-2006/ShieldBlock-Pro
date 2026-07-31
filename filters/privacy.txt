@@ -1,0 +1,514 @@
+! ShieldBlock Pro — Privacy & Tracker Filter List
+! Format: EasyList-compatible (domain anchor rules only)
+! Compiler: scripts/filter-compiler.js
+! Categories: Analytics, Session Recording, Social Trackers, Error Tracking,
+!             Customer Platforms, OEM Telemetry, CRM/Marketing
+!
+! ============================================================================
+! WEB ANALYTICS
+! ============================================================================
+||google-analytics.com^
+||www.google-analytics.com^
+||ssl.google-analytics.com^
+||analytics.google.com^
+||googletagmanager.com^
+||www.googletagmanager.com^
+||googletagservices.com^
+||adservice.google.com^
+||bat.bing.com^
+||mc.yandex.ru^
+||metrica.yandex.ru^
+||mc.yandex.com^
+!
+! ============================================================================
+! ADOBE ANALYTICS
+! ============================================================================
+||omtrdc.net^
+||2o7.net^
+||sc.omtrdc.net^
+||omniture.com^
+||adobedtm.com^
+||demdex.net^
+||everesttech.net^
+||mboxedge.net^
+||adobe.io^
+||adobeanalytics.com^
+||edgegateway.adobe.com^
+!
+! ============================================================================
+! MIXPANEL
+! ============================================================================
+||mixpanel.com^
+||api.mixpanel.com^
+||decide.mixpanel.com^
+||cdn.mxpnl.com^
+!
+! ============================================================================
+! SEGMENT
+! ============================================================================
+||cdn.segment.com^
+||api.segment.io^
+||cdn.segment.io^
+||segment.io^
+||analytics.segment.com^
+!
+! ============================================================================
+! AMPLITUDE
+! ============================================================================
+||cdn.amplitude.com^
+||api.amplitude.com^
+||api2.amplitude.com^
+||amplitude.com^
+!
+! ============================================================================
+! HEAP
+! ============================================================================
+||heap.io^
+||heapanalytics.com^
+||cdn.heapanalytics.com^
+!
+! ============================================================================
+! HOTJAR
+! ============================================================================
+||hotjar.com^
+||static.hotjar.com^
+||script.hotjar.com^
+||api.hotjar.com^
+||vc.hotjar.io^
+!
+! ============================================================================
+! MOUSEFLOW
+! ============================================================================
+||mouseflow.com^
+||a.mouseflow.com^
+||cdn.mouseflow.com^
+!
+! ============================================================================
+! FULLSTORY
+! ============================================================================
+||fullstory.com^
+||rs.fullstory.com^
+||edge.fullstory.com^
+!
+! ============================================================================
+! SMARTLOOK
+! ============================================================================
+||smartlook.com^
+||rec.smartlook.com^
+||assets.smartlook.com^
+!
+! ============================================================================
+! LUCKY ORANGE
+! ============================================================================
+||luckyorange.com^
+||luckyorange.net^
+||cdn.luckyorange.com^
+||ws.luckyorange.net^
+!
+! ============================================================================
+! CONTENTSQUARE
+! ============================================================================
+||contentsquare.net^
+||replay.contentsquare.net^
+||cdn.contentsquare.net^
+!
+! ============================================================================
+! MICROSOFT CLARITY
+! ============================================================================
+||clarity.ms^
+||www.clarity.ms^
+||c.clarity.ms^
+!
+! ============================================================================
+! CRAZYEGG
+! ============================================================================
+||crazyegg.com^
+||script.crazyegg.com^
+!
+! ============================================================================
+! QUANTSERVE / COMSCORE
+! ============================================================================
+||quantserve.com^
+||comscore.com^
+||scorecardresearch.com^
+||beacon.scorecardresearch.com^
+!
+! ============================================================================
+! PARSELY / CHARTBEAT
+! ============================================================================
+||parsely.com^
+||chartbeat.com^
+||static.chartbeat.com^
+||ping.chartbeat.net^
+!
+! ============================================================================
+! KISSMETRICS / WOOPRA
+! ============================================================================
+||kissmetrics.com^
+||woopra.com^
+||track.woopra.com^
+!
+! ============================================================================
+! SOCIAL TRACKERS — FACEBOOK / META
+! ============================================================================
+||www.facebook.com/tr/
+||connect.facebook.net^
+||graph.facebook.com^
+||pixel.facebook.com^
+||an.facebook.com^
+!
+! ============================================================================
+! SOCIAL TRACKERS — X (TWITTER)
+! ============================================================================
+||ads.twitter.com^
+||t.co^
+||analytics.twitter.com^
+||t.twitter.com^
+!
+! ============================================================================
+! SOCIAL TRACKERS — TIKTOK
+! ============================================================================
+||analytics.tiktok.com^
+||log.byteio.com^
+||log.byteoversea.com^
+||tiktok.com/api/^
+||mon.applovin.com^
+!
+! ============================================================================
+! SOCIAL TRACKERS — PINTEREST
+! ============================================================================
+||analytics.pinterest.com^
+||trk.pinterest.com^
+||ct.pinterest.com^
+!
+! ============================================================================
+! SOCIAL TRACKERS — LINKEDIN
+! ============================================================================
+||snap.licdn.com^
+||px.ads.linkedin.com^
+||dc.ads.linkedin.com^
+||p.adsymptotic.com^
+!
+! ============================================================================
+! SOCIAL TRACKERS — SNAPCHAT
+! ============================================================================
+||tr.snapchat.com^
+||sc-static.net^
+!
+! ============================================================================
+! SOCIAL TRACKERS — REDDIT
+! ============================================================================
+||redd.it^
+||ads.reddit.com^
+!
+! ============================================================================
+! SOCIAL TRACKERS — DISCORD
+! ============================================================================
+||discord.com/api/^*/track^
+!
+! ============================================================================
+! ERROR TRACKING — SENTRY
+! ============================================================================
+||sentry.io^
+||ingest.sentry.io^
+||browser.sentry-cdn.com^
+!
+! ============================================================================
+! ERROR TRACKING — BUGSNAG
+! ============================================================================
+||bugsnag.com^
+||notify.bugsnag.com^
+||sessions.bugsnag.com^
+!
+! ============================================================================
+! ERROR TRACKING — ROLLBAR
+! ============================================================================
+||rollbar.com^
+||api.rollbar.com^
+||d.rollbar.com^
+!
+! ============================================================================
+! ERROR TRACKING — LOGROCKET
+! ============================================================================
+||logrocket.io^
+||cdn.logrocket.io^
+||r.logrocket.io^
+||storage.logrocket.io^
+!
+! ============================================================================
+! ERROR TRACKING — RAYGUN
+! ============================================================================
+||raygun.com^
+||api.raygun.com^
+||raygun.io^
+!
+! ============================================================================
+! ERROR TRACKING — DATADOG
+! ============================================================================
+||rum.browser-intake-datadoghq.com^
+||logs.browser-intake-datadoghq.com^
+||session-replay.browser-intake-datadoghq.com^
+!
+! ============================================================================
+! CUSTOMER PLATFORM — INTERCOM
+! ============================================================================
+||widget.intercom.io^
+||js.intercomcdn.com^
+||api-iam.intercom.io^
+||nexus.intercom.io^
+||intercom.io^
+!
+! ============================================================================
+! CUSTOMER PLATFORM — ZENDESK
+! ============================================================================
+||v2.zopim.com^
+||ekr.zdassets.com^
+||static.zdassets.com^
+||ravioli.zopim.com^
+!
+! ============================================================================
+! CUSTOMER PLATFORM — FRESHWORKS
+! ============================================================================
+||luckyorange.net^
+||wchat.io^
+||freshbots.ai^
+||freshdesk.com/^*/widget^
+||freshservice.com/^*/widget^
+||freshchat.com^
+||d3wq4h8cp9tz4y.cloudfront.net^
+!
+! ============================================================================
+! CUSTOMER PLATFORM — HUBSPOT
+! ============================================================================
+||js.hs-scripts.com^
+||js.hubspot.com^
+||track.hubspot.com^
+||hs-analytics.net^
+||hs-banner.com^
+||hubspot.com/^*/analytics^
+||forms.hubspot.com^
+||js.usemessages.com^
+||js.hsmails.com^
+!
+! ============================================================================
+! CUSTOMER PLATFORM — DRIFT
+! ============================================================================
+||js.driftt.com^
+||customer.drift.com^
+||drift.com^
+||event.drift.com^
+!
+! ============================================================================
+! CUSTOMER PLATFORM — CRISP
+! ============================================================================
+||client.crisp.chat^
+||settings.crisp.chat^
+||relay.crisp.chat^
+||crisp.chat^
+!
+! ============================================================================
+! CUSTOMER PLATFORM — LIVECHAT
+! ============================================================================
+||cdn.livechatinc.com^
+||livechat.com^
+||secure.livechatinc.com^
+!
+! ============================================================================
+! CUSTOMER PLATFORM — TAWK.TO
+! ============================================================================
+||tawk.to^
+||embed.tawk.to^
+||va.tawk.to^
+||cdn.tawk.to^
+!
+! ============================================================================
+! CRM / MARKETING — BRAZE
+! ============================================================================
+||app.appboy.com^
+||sdk.iad-01.braze.com^
+||sdk.iad-02.braze.com^
+||sdk.iad-03.braze.com^
+||sdk.iad-04.braze.com^
+||sdk.iad-05.braze.com^
+||sdk.iad-06.braze.com^
+||sdk.iad-08.braze.com^
+||js.appboycdn.com^
+||braze.com^
+!
+! ============================================================================
+! CRM / MARKETING — KLAVIYO
+! ============================================================================
+||klaviyo.com^
+||static.klaviyo.com^
+||a.klaviyo.com^
+||fast.klaviyo.com^
+!
+! ============================================================================
+! CRM / MARKETING — PENDO
+! ============================================================================
+||pendo.io^
+||cdn.pendo.io^
+||app.pendo.io^
+||data.pendo.io^
+!
+! ============================================================================
+! CRM / MARKETING — GAINSIGHT
+! ============================================================================
+||aptrinsic.com^
+||web-sdk.aptrinsic.com^
+!
+! ============================================================================
+! CRM / MARKETING — MARKETO
+! ============================================================================
+||munchkin.marketo.net^
+||marketo.net^
+||pages.marketo.com^
+!
+! ============================================================================
+! CRM / MARKETING — SPRIG / USERLEAP
+! ============================================================================
+||sprig.com^
+||cdn.sprig.com^
+||userleap.com^
+!
+! ============================================================================
+! CRM / MARKETING — CUSTOMER.IO
+! ============================================================================
+||customer.io^
+||track.customer.io^
+||cdp.customer.io^
+!
+! ============================================================================
+! OEM TELEMETRY — SAMSUNG
+! ============================================================================
+||samsungacrs.com^
+||log.samsungacrs.com^
+||cdn.samsungacrs.com^
+||samsungosp.com^
+||samsungelectronics.com/^*/telemetry^
+!
+! ============================================================================
+! OEM TELEMETRY — XIAOMI
+! ============================================================================
+||tracking.miui.com^
+||data.miui.com^
+||api.miui.com/^*/report^
+||sdkconfig.ad.xiaomi.com^
+||globalapi.ad.xiaomi.com^
+||sdkconfig.ad.global.xiaomi.com^
+!
+! ============================================================================
+! OEM TELEMETRY — HUAWEI
+! ============================================================================
+||logservice1.hicloud.com^
+||metric.cloud.huawei.com^
+||hms.baidu.com^
+||adservice.huawei.com^
+||rs.appgallery.huawei.com^
+!
+! ============================================================================
+! OEM TELEMETRY — OPPO / REALME / ONEPLUS
+! ============================================================================
+||aps.coloros.com^
+||log.coloros.com^
+||coloros.com/^*/report^
+||heytap.com/^*/log^
+||openid.heytap.com^
+||datastream.oneplus.com^
+||datastream.op.oneplus.cn^
+!
+! ============================================================================
+! OEM TELEMETRY — VIVO
+! ============================================================================
+||push.vivo.com.cn^
+||applog.vivo.com.cn^
+||logger.vivo.com.cn^
+!
+! ============================================================================
+! MISC TRACKERS
+! ============================================================================
+||collector.github.com^
+||stats.g.doubleclick.net^
+||td.doubleclick.net^
+||tracking.g2crowd.com^
+||track.g2.com^
+||g2crowd.com/^*/tracking^
+||bat.r.msn.com^
+||tr.snapchat.com^
+||tr.pinterest.com^
+||facebook.com/tr/
+||graph.instagram.com^
+||i.instagram.com^
+!
+! ============================================================================
+! ADDITIONAL ANALYTICS
+! ============================================================================
+||mopinion.com^
+||usabilla.com^
+||userback.io^
+||fullcalendar.io/^*/analytics^
+||loggly.com^
+||sumo.com^
+||sumo.io^
+||sumome.com^
+||useinsider.com^
+||insider.com/^*/tracker^
+||jivox.com^
+||salecycle.com^
+||barilliance.net^
+||trueleafmedia.com^
+||monetate.net^
+||monetate.com^
+||qualtrics.com^
+||surveymonkey.com/^*/tracker^
+||hotjar.io^
+!
+! ============================================================================
+! KNOWN TRACKING CDNS
+! ============================================================================
+||rum.browser-intake-datadoghq.com^
+!
+! ============================================================================
+! TARGETED AD BLOCK TEST PRIVACY & TELEMETRY
+! ============================================================================
+||analyticsengine.s3.amazonaws.com^
+||analyticss3.amazonaws.com^
+||click.googleanalytics.com^
+||ads-api.twitter.com^
+||events.reddit.com^
+||events.redditmedia.com^
+||ads.pinterest.com^
+||log.pinterest.com^
+||geo.yahoo.com^
+||udcm.yahoo.com^
+||analytics.query.yahoo.com^
+||log.fc.yahoo.com^
+||appmetrica.yandex.ru^
+||adfstat.yandex.ru^
+||api.ad.xiaomi.com^
+||data.mistat.xiaomi.com^
+||data.mistat.india.xiaomi.com^
+||data.mistat.rus.xiaomi.com^
+||sdkconfig.ad.intl.xiaomi.com^
+||tracking.rus.miui.com^
+||iot-eu-logger.realme.com^
+||iot-logger.realme.com^
+||grs.hicloud.com^
+||logservice.hicloud.com^
+||logbak.hicloud.com^
+||samsungads.com^
+||smetrics.samsung.com^
+||analytics-api.samsunghealthcn.com^
+||iadsdk.apple.com^
+||metrics.icloud.com^
+||metrics.mzstatic.com^
+||books-analytics-events.apple.com^
+||weather-analytics-events.apple.com^
+||notes-analytics-events.apple.com^
+||adtago.s3.amazonaws.com^
+||freshmarketer.com^
+||stats.wp.com^
+||analytics.pointdrive.linkedin.com^
+||analytics.yahoo.com^
+||metrika.yandex.ru^
+||data.ads.oppomobile.com^

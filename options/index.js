@@ -452,10 +452,26 @@ async function loadAboutStats() {
   const tEl  = document.getElementById('statTotal');
   const cEl  = document.getElementById('statCustom');
 
-  if (rEl) rEl.textContent = '2,500+';
+  // Compute real rule count from static rulesets + dynamic rules
+  let staticCount = 0;
+  try {
+    // Static ruleset sizes (must match the JSON files)
+    const RULESET_SIZES = { ads: 322, privacy: 286 };
+    const enabledRulesets = await chrome.declarativeNetRequest.getEnabledRulesets();
+    for (const id of enabledRulesets) {
+      staticCount += RULESET_SIZES[id] ?? 0;
+    }
+    const dynamicRules = await chrome.declarativeNetRequest.getDynamicRules();
+    staticCount += dynamicRules.length;
+  } catch {
+    staticCount = 608; // Fallback if DNR API unavailable
+  }
+
+  if (rEl) rEl.textContent = staticCount.toLocaleString();
   if (tEl) tEl.textContent = formatNumber(stats.total || 0);
   if (cEl) cEl.textContent = String(rules.length);
 }
+
 
 // ── Theme ─────────────────────────────────────────────────────────────────
 

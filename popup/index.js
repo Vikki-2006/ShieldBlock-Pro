@@ -65,11 +65,21 @@ async function init() {
   // Bind events
   bindEvents();
 
-  // Auto-refresh every 3 seconds
+  // Auto-refresh every 3 seconds (fallback polling)
   setInterval(async () => {
     await loadStatus(tab);
+    await loadStats();
     await loadRecentActivity();
   }, 3000);
+
+  // Real-time push: refresh immediately when a request is blocked
+  chrome.runtime.onMessage.addListener((message) => {
+    if (message.type === MSG.STATS_UPDATED) {
+      loadStatus(tab).catch(() => {});
+      loadStats().catch(() => {});
+      loadRecentActivity().catch(() => {});
+    }
+  });
 }
 
 // ── Data Loaders ───────────────────────────────────────────────────────────

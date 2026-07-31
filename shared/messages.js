@@ -78,6 +78,11 @@ export const MSG = Object.freeze({
   /** Get top blocked domains. Response: DomainEntry[] */
   GET_TOP_DOMAINS: 'dashboard/topDomains',
 
+  // ── Background → UI (popup / dashboard) ───────────────────────────────────
+
+  /** Notify open UI pages that stats have changed. Payload: { tabId, domain, category } */
+  STATS_UPDATED: 'background/statsUpdated',
+
   // ── Background → Content (via scripting.executeScript or stored messages) ──
 
   /** Tell content script its init config. Payload: ContentInitConfig */
