@@ -1,4 +1,3 @@
-EGWSA
 
 
 <div align="center">
