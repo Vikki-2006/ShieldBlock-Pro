@@ -1,38 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<img src="assets/logo.png" width="140" alt="ShieldBlock Pro">
-
 # 🛡️ ShieldBlock Pro
 
 ### Professional Manifest V3 Ad Blocker for Chromium Browsers
