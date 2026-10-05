@@ -55,6 +55,14 @@
 
 
 
+
+
+
+
+
+
+
+
 # 🛡️ ShieldBlock Pro
 
 ### Professional Manifest V3 Ad Blocker for Chromium Browsers
